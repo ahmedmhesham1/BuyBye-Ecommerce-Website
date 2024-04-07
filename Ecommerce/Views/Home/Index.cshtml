@@ -1,0 +1,468 @@
+﻿@model IEnumerable<Product>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+<style>
+	.pictureCard {
+		border-radius: 6px;
+		transition: all 0.2s;
+	}
+
+		.pictureCard:hover {
+			box-shadow: 0px 7px 12px rgba(108, 95, 252, 0.5);
+			transform: translateY(-10px);
+			color: rgb(108, 95, 252)
+		}
+</style>
+
+
+<div class="gradient-banner">
+	<div class="shapes-container">
+		<div class="shape aos-init aos-animate" data-aos="fade-down-left" data-aos-duration="1500" data-aos-delay="100"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="200"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
+		<div class="shape aos-init aos-animate" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="200"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="100"></div>
+		<div class="shape aos-init aos-animate" data-aos="zoom-out" data-aos-duration="2000" data-aos-delay="500"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="200"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="100"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="0"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-down" data-aos-duration="500" data-aos-delay="0"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="100"></div>
+		<div class="shape aos-init aos-animate" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="0"></div>
+	</div>
+
+	<div class="container" style="padding-top:-2%;">
+		<div class="row align-items-center">
+			<div class="col-md-6 order-2 order-md-1 text-center text-md-left ml-md-4 typeWriter" style="padding-left:5%;color:white">
+
+				<div class="buy">BuyBye...</div>
+				<h1 class="text-start fw-bold" style="font-size: 3rem;">Your Ultimate Marketplace for Buying and Selling!</h1>
+				<h4 class="pb-3 ">
+					Experience the Best of Both Worlds: At <span style="font-family:'Lily Script One', system-ui;">BuyBye</span>, we offer a unique opportunity to engage in seamless transactions as both a buyer and a seller.
+					Whether you're looking to declutter your space or searching for your next prized possession,
+					our platform caters to all your needs.
+				</h4>
+
+				<a href="#container" target="_self" class="btn ripple btn-min w-lg mb-3 me-2 btn-light" style="background-color:white; color:darkslateblue">
+					<i class="fe fe-play me-2"></i> Get Started
+				</a>
+				@*
+				<a href="https://themeforest.net/user/spruko/portfolio" class="btn ripple btn-min w-lg btn-light-primary mb-3 me-2" target="_blank">
+				<i class="fe fe-eye me-2"></i>Discover More
+				</a> *@
+			</div>
+			<div class="col-md-6 text-center order-1 order-md-2" style="padding-right:5%;">
+				<h1 class="fw-semibold" style="background: linear-gradient(90deg, rgba(255,173,30,1) 0%, rgba(255,231,0,1) 51%, rgba(255,173,30,1) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: #fff; margin-top:0; font-size: 1.7rem; margin-bottom:4%; font-family:inherit;">
+					<span class="fa fa-star"></span>  Top Rated Products <span class="fa fa-star"></span>
+				</h1>
+				<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						@foreach (var item in Enumerable.Skip(ViewBag.TopRated, 1))
+						{
+							<div class="carousel-item" data-bs-interval="2000">
+								<div id="pictureCard" class="" style="display: flex;justify-content: center;">
+									<div class="card" style="width:50%">
+										<div class="product-grid6">
+											<div class="product-image6 p-5">
+
+												<a href="/Product/Details/@item.Id">
+													<img class="img-fluid br-7 w-100" style="height:210px; width:100%; object-fit:contain" src="/Uploads/@item.Image" alt="img">
+												</a>
+											</div>
+											<div class="card-body pt-0">
+												<div class="product-content text-center">
+													<h1 class="title fw-bold fs-20"><a href="/Product/Details/@item.Id">@item.Name</a></h1>
+
+													<span class="fw-bold text-success">
+														@if (ViewBag.AverageRatings[item.Id] > 1)
+														{
+															for (int i = 0; i < ViewBag.AverageRatings[item.Id]; i++)
+															{
+																<span class="fa fa-star text-warning"></span>
+															}
+														}
+														else
+														{
+															<span class="fa fa-star text-warning"></span>
+														}
+
+													</span>
+
+
+													<div class="price">
+														@item.Price
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						}
+						@{
+							var firstPrd = ViewBag.TopRated[0];
+						}
+						<div class="carousel-item active" data-bs-interval="2000">
+							<div id="pictureCard" class="" style="display: flex;justify-content: center;">
+								<div class="card" style="width:50%">
+									<div class="product-grid6">
+										<div class="product-image6 p-5">
+
+											<a href="/Product/Details/@firstPrd.Id">
+												<img class="img-fluid br-7 w-100" style="height:210px; width:100%; object-fit:contain" src="/Uploads/@firstPrd.Image" alt="img">
+											</a>
+										</div>
+										<div class="card-body pt-0">
+											<div class="product-content text-center">
+												<h1 class="title fw-bold fs-20"><a href="/Product/Details/@firstPrd.Id">@firstPrd.Name</a></h1>
+
+												<span class="fw-bold text-success">
+													@if (ViewBag.AverageRatings[firstPrd.Id] > 1)
+													{
+														for (int i = 0; i < ViewBag.AverageRatings[firstPrd.Id]; i++)
+														{
+															<span class="fa fa-star text-warning"></span>
+														}
+													}
+													else
+													{
+														<span class="fa fa-star text-warning"></span>
+													}
+
+												</span>
+
+
+												<div class="price">
+													@firstPrd.Price EGP
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div style="width: 100%; height: 100%; position: relative;">
+	<div class="jumbo" style="width: 100%; height: 100%;transform:  scale(-1); position: absolute;top:0px;left: 0px;z-index:-1">
+	</div>
+
+	<!--app-content open-->
+	<div class="main-content app-content mt-0">
+		<div class="side-app">
+
+			<!-- CONTAINER -->
+			<div class="main-container container-fluid">
+
+				<!-- PAGE-HEADER -->
+				<div class="page-header">
+					<h1 class="page-title">Shop</h1>
+					<div>
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="javascript:void(0)">E-Commerce</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Shop</li>
+						</ol>
+					</div>
+				</div>
+				<!-- PAGE-HEADER END -->
+				<!-- ROW-1 OPEN -->
+				<div id="container" class="row row-cards">
+
+					<div class="col-xl-3 col-lg-4">
+						<div class="row">
+							<div class="col-md-12 col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title">Categories</div>
+									</div>
+									<div class="card-body">
+										<ul class="list-group">
+											@foreach (Category c in ViewBag.catlist)
+											{
+												<li class="list-group-item border-0 p-0">
+													<a asp-action="Index" asp-controller="Home" asp-route-categoryId="@c.Id">
+														<i class="fe fe-chevron-right"></i> @c.Name
+													</a>
+												</li>
+											}
+
+										</ul>
+									</div>
+								</div>
+
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title">Price Range</div>
+									</div>
+
+									<form id="filterForm" asp-action="Index" asp-controller="Home">
+										<div class="card-body">
+											<label class="custom-control custom-radio mb-0 mt-1" style="cursor:pointer">
+												<input type="radio" class="custom-control-input" name="data" value="option1" @(ViewBag.Data == "option1" ? "checked" : "") onchange="document.getElementById('filterForm').submit();">
+												<span class="custom-control-label">Upto EGP 500</span>
+											</label>
+											<label class="custom-control custom-radio mb-0 mt-1" style="cursor:pointer">
+												<input type="radio" class="custom-control-input" name="data" @(ViewBag.Data == "option2" ? "checked" : "") onchange="document.getElementById('filterForm').submit();" value="option2">
+												<span class="custom-control-label">EGP 500 - EGP 1000</span>
+											</label>
+											<label class="custom-control custom-radio mb-0 mt-1" style="cursor:pointer">
+												<input type="radio" class="custom-control-input" name="data" @(ViewBag.Data == "option3" ? "checked" : "") onchange="document.getElementById('filterForm').submit();" value="option3">
+												<span class="custom-control-label">EGP 1000 - EGP 1500</span>
+											</label>
+											<label class="custom-control custom-radio mb-0 mt-1" style="cursor:pointer">
+												<input type="radio" class="custom-control-input" name="data" @(ViewBag.Data == "option4" ? "checked" : "") onchange="document.getElementById('filterForm').submit();" value="option4">
+												<span class="custom-control-label">Over EGP 2000</span>
+											</label>
+
+											<label class="custom-control custom-radio mb-0 mt-1" style="cursor:pointer">
+												<input type="radio" class="custom-control-input" name="data" value="custom" @(ViewBag.Data == "custom" ? "checked" : "") onchange="show();">
+												<span class="custom-control-label">Custom</span>
+											</label>
+
+										</div>
+										<div class="custom-price-inputs" style="display: @(ViewBag.Data == "custom" ? "block" : "none")">
+											<input type="number" name="minPrice" placeholder="From" value="@ViewBag.MinPrice" required min="0">
+											<input type="number" name="maxPrice" placeholder="To" value="@ViewBag.MaxPrice" required min="0">
+											<button id="applyBtn" type="button" onclick="document.getElementById('filterForm').submit();">Apply</button>
+										</div>
+									</form>
+								</div>
+								<script>
+									function show() {
+										var customInputsDiv = document.querySelector('.custom-price-inputs');
+										var customRadio = document.querySelector('input[name="data"][value="custom"]');
+
+										if (customRadio.checked) {
+											customInputsDiv.style.display = "block";
+										} else {
+											customInputsDiv.style.display = "none";
+										}
+									}
+								</script>
+
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title">Categories</div>
+									</div>
+									<div class="card-body">
+
+										<form asp-controller="Home" asp-action="Index">
+											<div class="form-group">
+												<label for="categoryId">Select Category:</label>
+												<select id="catList" name="categoryId" asp-items="ViewBag.list" class="form-control form-select select2" onchange="this.form.submit()">
+													<option value="">All Categories</option>
+												</select>
+
+											</div>
+										</form>
+
+									</div>
+								</div>
+
+
+
+							</div>
+						</div>
+					</div>
+					<!-- COL-END -->
+					<div class="col-xl-9 col-lg-8">
+						<div class="row">
+							<div class="col-xl-12">
+								<div class="card p-0">
+									<div class="card-body p-4">
+										<div class="row" style="display:flex;justify-content:space-between">
+											<div class="col-xl-5 col-lg-8 col-md-8 col-sm-8">
+
+												@*                                                     <form asp-controller="Home" asp-action="Index">
+												<div class="input-group d-flex w-100 float-start">
+												<input type="text" name="prdName" value="@ViewBag.search" class="form-control border-end-0 my-2" placeholder="Search ...">
+												<button type="submit" class="btn input-group-text bg-transparent border-start-0 text-muted my-2">
+												<i class="fe fe-search text-muted" aria-hidden="true"></i>
+												</button>
+												</div>
+												</form> *@
+											</div>
+											<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+												<ul class="nav item2-gl-menu float-end my-2">
+													<li class="border-end"><a href="#tab-11" class="show active" data-bs-toggle="tab" title="List style"><i class="fa fa-th"></i></a></li>
+													<li><a href="#tab-12" data-bs-toggle="tab" class="" title="Grid"><i class="fa fa-list"></i></a></li>
+												</ul>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						@if (!Model.Any())
+						{
+							<div id="notFoundBox">
+								<p id="oops">Oops... We didn't find what you are looking for!</p>
+								<img src="~/assets/images/noresults.png" />
+							</div>
+						}
+						else
+						{
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab-11">
+									<div class="row">
+										@foreach (var item in Model)
+										{
+											<div class="col-md-6 col-xl-4 col-sm-6 ">
+												<div class="card pictureCard">
+													<div class="product-grid6">
+														<div class="product-image6 p-5">
+
+															<a asp-action="Details" asp-controller="Product" asp-route-id="@item.Id">
+																<img class="img-fluid br-7 w-100" style="height:210px; width:100%; object-fit:contain" src="~/Uploads/@item.Image" alt="img">
+															</a>
+														</div>
+														<div class="card-body pt-0">
+															<div class="product-content text-center">
+																<h1 class="title fw-bold fs-20"><a asp-action="Details" asp-controller="Product" asp-route-id="@item.Id">@item.Name</a></h1>
+
+																@if (ViewBag.AverageRatings.ContainsKey(item.Id) && ViewBag.AverageRatings[item.Id] > 0)
+																{
+																	<span class="fw-bold text-success">
+																		@for (int i = 0; i < (int)ViewBag.AverageRatings[item.Id]; i++)
+																		{
+																			<span class="fa fa-star text-warning"></span>
+																		}
+																	</span>
+																}
+																else
+																{
+																	<span class="fw-bold text-success">
+																		No Reviews Yet
+																	</span>
+																}
+
+
+																<div class="price">
+																	EGP @item.Price
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										}
+										<div class="mb-5" style="text-align:center">
+											<div style="display:inline-block;">
+
+												@Html.PagedListPager((IPagedList)Model, pageNo => Url.Action("Index", new { pageNo, ViewBag.CategoryId, ViewBag.Data, ViewBag.MinPrice, ViewBag.MaxPrice }),
+																								new X.PagedList.Web.Common.PagedListRenderOptions
+											{
+												LiElementClasses = new string[] { "page-item" },
+												PageClasses = new string[] { "page-link" }
+											})
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane" id="tab-12">
+									<div class="row">
+										@foreach (var item in Model)
+										{
+											<div class="col-xl-12 col-lg-12 col-md-12">
+												<div class="card overflow-hidden">
+													<div class="card-body">
+														<div class="row g-0">
+															<div class="col-xl-3 col-lg-12 col-md-12">
+																<div class="product-list">
+
+																	<div class="br-be-0 br-te-0">
+																		<a asp-action="Details" asp-controller="Product" asp-route-id="@item.Id">
+																			<img src="~/Uploads/@item.Image" alt="img" class="cover-image br-7 w-100">
+																		</a>
+																	</div>
+																</div>
+															</div>
+															<div class="col-xl-6 col-lg-12 col-md-12 border-end my-auto">
+																<div class="card-body">
+																	<div class="mb-3">
+																		<a asp-action="Details" asp-controller="Product" asp-route-id="@item.Id">
+																			<h3 class="fw-bold fs-30 mb-3">@item.Name</h3>
+																			@if (ViewBag.AverageRatings.ContainsKey(item.Id) && ViewBag.AverageRatings[item.Id] > 0)
+																			{
+																				<span class="fw-bold text-success">
+																					@for (int i = 0; i < (int)ViewBag.AverageRatings[item.Id]; i++)
+																					{
+																						<span class="fa fa-star text-warning"></span>
+																					}
+																				</span>
+																			}
+																			else
+																			{
+																				<span class="fw-bold text-success">
+																					No Reviews Yet
+																				</span>
+																			}
+																		</a>
+																		<p class="fs-16">@item.Description</p>
+
+																	</div>
+																</div>
+															</div>
+															<div class="col-xl-3 col-lg-12 col-md-12 my-auto">
+																<div class="card-body p-0">
+																	<div class="price h3 text-center mb-5 fw-bold">EGP @item.Price</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										}
+
+										<div class="mb-5" style="text-align:center">
+											<div style="display:inline-block;">
+
+												@Html.PagedListPager((IPagedList)Model, pageNo => Url.Action("Index", new { pageNo, ViewBag.CategoryId }),
+																								new X.PagedList.Web.Common.PagedListRenderOptions
+											{
+												LiElementClasses = new string[] { "page-item" },
+												PageClasses = new string[] { "page-link" }
+											})
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						
+						}
+						<!-- COL-END -->
+					</div>
+					<!-- ROW-1 CLOSED -->
+				</div>
+				<!-- ROW-1 END -->
+			</div>
+			<!-- CONTAINER CLOSED -->
+		</div>
+	</div>
+
+
+

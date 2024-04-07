@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Ecommerce.Models.Product>
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+	Layout = "_Layout";
+}
+@{
+	ViewData["Title"] = "Index";
+}
+
+<div class="main-container container-fluid">
+	<div class="page">
+		<div class="page-main">
+
+			<!-- app-Header -->
+			<!-- /app-Header -->
+			<!--app-content open-->
+			<div class="main-content app-content mt-0">
+				<div class="side-app">
+
+					<!-- CONTAINER -->
+					<div class="main-container container-fluid">
+
+						<div class="page-header">
+							<h1 class="page-title">Your Posted Products</h1>
+							<div>
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="javascript:void(0)">Tables</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Your Posted Products</li>
+								</ol>
+							</div>
+						</div>
+						<div class="row row-sm">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Your Products</h3>
+										<a asp-action="Create" class="btn btn-primary" style="margin-left:auto;"><i class="fa fa-plus-square"></i> &nbsp;  Add New Product</a>
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+												<div class="col-sm-12">
+													<table class="table table-bordered border-bottom dataTable no-footer" id="basic-datatable" role="grid" aria-describedby="basic-datatable_info">
+														<thead style="text-align:center;">
+															<tr role="row">
+																<th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="First name: activate to sort column ascending" style="width: 95.5156px;">
+																	@Html.DisplayNameFor(model => model.Name)
+																</th>
+																<th class="wd-15p border-bottom-0 sorting sorting_desc" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Last name: activate to sort column ascending" aria-sort="descending" style="width: 88.5469px;">
+																	@Html.DisplayNameFor(model => model.Description)
+																</th>
+																<th class="wd-20p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 178.531px;">
+																	@Html.DisplayNameFor(model => model.Price)
+																</th>
+																<th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 92.5312px;">
+																	Status
+																</th>
+																<th class="wd-10p border-bottom-0" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" style="width: 67.7031px;">
+																	@Html.DisplayNameFor(model => model.Image)
+																</th>
+																<th class="wd-25p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="E-mail: activate to sort column ascending" style="width: 185.141px;">
+																	@Html.DisplayNameFor(model => model.Category)
+																</th>
+																<th>
+																	Action
+																</th>
+															</tr>
+														</thead>
+														<tbody style="text-align:center;">
+															@foreach (var item in Model)
+															{
+																<tr>
+																	<td>
+																		@Html.DisplayFor(modelItem => item.Name)
+																	</td>
+																	<td>
+																		@Html.DisplayFor(modelItem => item.Description)
+																	</td>
+																	<td>
+																		@Html.DisplayFor(modelItem => item.Price)
+																	</td>
+																	<td>
+																		@if (item.IsApproved)
+																		{
+																			<span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Approved</span>
+																		}
+																		else
+																		{
+																			<span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
+																		}
+																	</td>
+																	<td>
+																		<div>
+																			<img style="width:auto;" src="~/Uploads/@item.Image" alt="test img">
+																		</div>
+																	</td>
+																	<td>
+																		@Html.DisplayFor(modelItem => item.Category.Name)
+																	</td>
+																	<td class="text-nowrap">
+																		<a asp-action="Edit" asp-route-id="@item.Id" id="bEdit" type="button" class="btn btn-sm btn-primary"><span class="fe fe-edit"> </span></a> |
+																		<a asp-action="Details" asp-route-id="@item.Id" id="bDel" type="button" class="btn  btn-sm btn-info">
+																			<span class="fe fe-info"> </span>
+																			</a> | 
+																		<a asp-action="Delete" asp-route-id="@item.Id" id="bDel" type="button" class="btn  btn-sm btn-danger">
+																			<span class="fe fe-trash-2"> </span>
+																		</a>
+																	</td>
+																</tr>
+															}
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

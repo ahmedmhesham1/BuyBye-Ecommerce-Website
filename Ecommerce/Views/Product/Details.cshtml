@@ -1,0 +1,565 @@
+@model Ecommerce.Models.Product
+
+@{
+	ViewData["Title"] = "Details";
+	var numOfStars = ViewBag.ratingSum / ViewBag.ratingCount;
+
+}
+<!-- PAGE -->
+<!--/APP-SIDEBAR -->
+<!--app-content open-->
+
+
+<div id="growls-default" style="display:none">
+	<div class="growl growl-notice growl-medium">
+		<div class="growl-close">×</div>
+		<div class="growl-title">Wohooo!</div>
+		<div class="growl-message">Product Added Successfully.</div>
+	</div>
+</div>
+
+<div id="ui_notifIt" class="warning" style="height: 60px; width: 400px; opacity: 0.8; top: 10px; left: 483px;display:none">
+	<p style="line-height: 60px; padding:10px">Done! Product added to your Wishlist!</p>
+</div>
+
+
+<div class="main-content app-content mt-0">
+	<div class="side-app">
+
+		<!-- CONTAINER -->
+		<div class="main-container container-fluid">
+
+			<!-- PAGE-HEADER -->
+			<div class="page-header">
+				<h1 class="page-title">Product Details</h1>
+				<div>
+
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">E-Commerce</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Product Details</li>
+					</ol>
+				</div>
+			</div>
+			<!-- PAGE-HEADER END -->
+			<!-- ROW-1 OPEN -->
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="row row-sm">
+								<div class="col-xl-5 col-lg-12 col-md-12">
+									<div class="row">
+										<div class="col-xl-12">
+											<div class="product-carousel">
+												<div id="Slider" class="carousel slide border" data-bs-ride="false">
+													<div class="carousel-inner">
+														<div class="carousel-item active">
+															<img src="~/Uploads/@Model.Image" alt="img" class="img-fluid mx-auto d-block">
+															<div class="text-center mt-5 mb-5 btn-list">
+															</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0">
+									<div class="mt-2 mb-4">
+										<h3 class="mb-3 fw-semibold">@Model.Name</h3>
+
+										<p class="text-muted mb-4">( @(Model.Reviews?.Count ?? 0) Customers Reviews) </p>
+										<span class="fw-bold text-success">
+
+											@for (int i = 0; i < numOfStars; i++)
+											{
+												<span class="fa fa-star text-warning"></span>
+											}
+										</span>
+										<h4 class="mt-4"><b> Description</b></h4>
+										<p>@Model.Description</p>
+										<h3 class="mb-4"><span class="me-2 fw-bold fs-25">@Model.Price EGP</span></h3>
+
+										<input id="prdId" hidden value="@Model.Id" />
+										@* <form id="form2" asp-action="Details" asp-route-id="@Model.Id"> *@
+										<form id="form2">
+											@foreach (var variation in ViewBag.variations)
+											{
+												<div class="colors d-flex me-3 mt-4 mb-5">
+													<div class="col-md-3">
+														<span class="mt-2 fw-bold">@variation.Name:</span>
+													</div>
+													<div class="col-md-9">
+														@{
+															SelectList varSL = new SelectList(ViewBag.variationOptions[ViewBag.variations.IndexOf(variation)], "Id", "Value");
+														}
+														<select id="@("Value" + ViewBag.variations.IndexOf(variation))" name="Value" class="form-control form-select select2 variation-dropdown" asp-items="varSL"></select>
+													</div>
+												</div>
+											}
+
+											<div class=" mt-4 mb-5">
+												<span class="fw-bold me-2">Availability :</span>
+												<span id="availability" class="fw-bold">In-stock</span>
+											</div>
+
+											<div class="row row-sm">
+												<div class="col">
+													<div class="mb-2 me-2 sizes">
+														<span class="fw-bold me-4">Quantity:</span>
+														<div class="input-group input-indec input-indec1 w-30 w-sm-60 mt-3">
+															<span class="input-group-btn">
+																<button type="button" id="subButton" class="minus btn btn-white btn-number btn-icon br-7 ">
+																	<i class="fa fa-minus text-muted"></i>
+																</button>
+															</span>
+															<input type="text" id="quantitySelected" name="quantity" class="form-control text-center qty" value="0">
+															<span class="input-group-btn">
+																<button id="addButton" type="button" class="quantity-right-plus btn btn-white btn-number btn-icon br-7">
+																	<i class="fa fa-plus text-muted"></i>
+																</button>
+															</span>
+															<span id="noMoreStock" class="text-danger"></span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<hr>
+										</form>
+										<a id="addToWishlist" class="btn ripple btn-secondary"><i class="fe fe-heart"> </i>Add to Wishlist</a>
+										<button id="form2Submit" class="btn ripple btn-primary me-2" /><i class="fe fe-shopping-cart"> </i>
+										Add to Cart
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-12 col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Customer Services</div>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-xl-4">
+									<div class="customer-services mb-2">
+										<div class="icon-content">
+											<span><i class="bi bi-truck"></i></span>
+											<h4>Delivery Info</h4>
+										</div>
+										<p>
+											Standard shipping typically takes 3 business days for domestic orders and 14 business days for international orders.
+											Once your order ships, you'll receive a tracking number via email for real-time updates on your delivery status.
+										</p>
+									</div>
+								</div>
+								<div class="col-xl-4">
+									<div class="customer-services mb-2">
+										<div class="icon-content">
+											<span><i class="bi bi-arrow-repeat"></i></span>
+											<h4>30 days returns</h4>
+										</div>
+										<p>
+											If you're not completely satisfied with your order, you have up to 30 days from the date of purchase to return it for a refund or exchange.
+											Simply contact our customer service team, and we'll guide you through the process.
+										</p>
+									</div>
+								</div>
+								<div class="col-xl-4">
+									<div class="customer-services">
+										<div class="icon-content">
+											<span><i class="bi bi-credit-card-2-front"></i></span>
+											<h4>15 years Warranty</h4>
+										</div>
+										<p>
+											We stand behind the quality of our products with confidence, which is why we offer an extensive 15-year warranty on all purchases.
+											This warranty covers any manufacturing defects and ensures that you can enjoy peace of mind with your investment for years to come.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-6">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Reviews</div>
+						</div>
+						<div class="card-body">
+							<div class="media mb-5">
+
+								<div class="media-body">
+									@if (Model.Reviews?.Count > 0)
+									{
+										int j = 0;
+
+										foreach (Review review in Model.Reviews)
+										{
+											@for (int i = 0; i < ViewBag.reviewRating[j].Rating; i++)
+											{
+												<span class="fa fa-star text-warning"></span>
+											}
+											<h5 class="mt-0 mb-0">@review.Customer.UserName</h5>
+											<p class="font-13 text-muted">@review.Comment</p>
+
+											j++;
+
+										}
+									}
+									else
+									{
+										<p class="font-13 text-muted">No Reviews yet</p>
+									}
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-6">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Add Review</div>
+						</div>
+
+
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-12">
+
+									@if (User.Identity.IsAuthenticated)
+									{
+										<h3>Leave a Review</h3>
+
+
+										<form asp-action="CreateReview" asp-controller="Review" method="post">
+
+											<input hidden name="CustomerId" class="form-control" value="@ViewBag.CustomerId" />
+											<input asp-for="@Model.Id" name="ProductId" hidden />
+											<div class="form-group">
+												<label id="Comment">Your Review:</label>
+												<textarea name="Comment" class="form-control" rows="5" placeholder="Write your review here..."></textarea>
+											</div>
+											<div class="card-body">
+												<div class="rating-stars block" id="rating-1" data-stars="2" style="cursor: pointer;">
+													<input type="hidden" id="rating-value" name="Rating" value="3">
+													<i class="fa fa-star" style="color:#f1c40f"></i>
+													<i class="fa fa-star" style="color: #f1c40f;"></i>
+													<i class="fa fa-star" style="color: rgb(236, 240, 241);"></i>
+													<i class="fa fa-star" style="color: rgb(236, 240, 241);"></i>
+													<i class="fa fa-star" style="color: rgb(236, 240, 241);"></i>
+												</div>
+											</div>
+											<button type="submit" class="btn btn-primary">Submit Review</button>
+										</form>
+									}
+									else
+									{
+										<h3>Sign In to add a Review</h3>
+										<a href="/Identity/Account/Login" class="btn btn-secondary">Sign In</a>
+
+
+									}
+
+								</div>
+							</div>
+							@*<form asp-action="Create">
+							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+							<div class="form-group">
+							<label asp-for="ProductId" class="control-label"></label>
+							<select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+							</div>
+							<div class="form-group">
+							<label asp-for="CustomerId" class="control-label"></label>
+							<select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+							</div>
+							<div class="form-group">
+							<label asp-for="Comment" class="control-label"></label>
+							<input asp-for="Comment" class="form-control" />
+							<span asp-validation-for="Comment" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+							<input type="submit" value="Create" class="btn btn-primary" />
+							</div>
+							</form> *@
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<!-- ROW-1 CLOSED -->
+		</div>
+		<!-- CONTAINER CLOSED -->
+	</div>
+</div>
+<!--app-content closed-->
+
+<script>
+	document.getElementById('form2').addEventListener('submit', function (event) {
+		var v1Value = document.getElementById('firstDropdown').value;
+		var v2Value = document.getElementById('Value2').value;
+
+		document.getElementById('v1').value = v1Value;
+		document.getElementById('v2').value = v2Value;
+
+		return true;
+	});
+
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		function CheckAvailability() {
+			var productId = @ViewBag.ProductId;
+
+			var selectedValues = [];
+			$('.variation-dropdown').each(function () {
+				selectedValues.push($(this).val());
+			});
+
+			$.ajax({
+				url: '/ProductItem/GetProductItem',
+				type: 'GET',
+				data: { id: productId, values: selectedValues },
+				traditional: true,
+				success: function (selectedPrdItem) {
+					if (selectedPrdItem && selectedPrdItem.quantity > 0) {
+						$('#availability').text('In-stock').removeClass('text-danger').addClass('text-success');
+
+					} else {
+						$('#availability').text('Out-of-stock').removeClass('text-success').addClass('text-danger');
+					}
+				},
+				error: function () {
+					console.log('Error occurred while fetching product item.');
+				}
+			});
+		}
+
+
+
+		CheckAvailability();
+
+		function updateAvailability() {
+			var productId = @ViewBag.ProductId;
+
+			var selectedValues = [];
+			$('.variation-dropdown').each(function () {
+				selectedValues.push($(this).val());
+			});
+
+			$.ajax({
+				url: '/ProductItem/GetProductItem',
+				type: 'GET',
+				data: { id: productId, values: selectedValues },
+				traditional: true,
+				success: function (selectedPrdItem) {
+					if (selectedPrdItem && selectedPrdItem.quantity > 0) {
+						$('#availability').text('In-stock').removeClass('text-danger').addClass('text-success');
+
+						var qtyInput = $('#quantitySelected'); //updated
+						var currentValue = parseInt(qtyInput.val());
+
+						console.log(currentValue)
+						console.log("here");
+						var maxQuantity = selectedPrdItem.quantity;
+
+
+						if (currentValue < maxQuantity) {
+							console.log("test");
+							qtyInput.val(currentValue + 1);
+						} else {
+							$('#noMoreStock').text('Sorry, No more items with this specs available');
+							qtyInput.val(maxQuantity);
+						}
+					} else {
+						$('#availability').text('Out-of-stock').removeClass('text-success').addClass('text-danger');
+					}
+				},
+				error: function () {
+					console.log('Error occurred while fetching product item.');
+				}
+			});
+		}
+
+		// Attach change event listener to SelectList elements
+		$('.variation-dropdown').change(function () {
+			$('.qty').val(0);
+			$('#noMoreStock').text('')
+			updateAvailability();
+		});
+
+		// Attach click event listener to addButton
+		$('#addButton').click(function () {
+			updateAvailability();
+		});
+		$('#subButton').click(function () {
+			$('#noMoreStock').text('')
+
+		});
+		$('#addToWishlist').click(function () {
+			var prdId = @Model.Id;
+			$.ajax({
+				type: "GET",
+				url: "/Wishlist/AddtoWishlist/" + prdId,
+
+				success: function (result) {
+					console.log("here");
+					document.getElementById('ui_notifIt').setAttribute('style', '');
+					setTimeout(function () {
+						$("#ui_notifIt").fadeTo(500, 0).slideUp(300, function () {
+							$(this).remove();
+						});
+					}, 3000);
+				},
+				error: function (result) {
+					console.log('error');
+				}
+			});
+		});
+	});
+</script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const starsContainer = document.getElementById('rating-1');
+		const hiddenInput = document.getElementById('rating-value');
+
+		// Event delegation for mouseover
+		starsContainer.addEventListener('mouseover', function (event) {
+			if (event.target.tagName === 'I') {
+				const hoveredStarIndex = Array.from(starsContainer.children).indexOf(event.target);
+
+				for (let i = 0; i <= hoveredStarIndex; i++) {
+					starsContainer.children[i].style.color = '#f1c40f'; // Active star color
+				}
+				for (let i = hoveredStarIndex + 1; i < starsContainer.children.length; i++) {
+					starsContainer.children[i].style.color = 'rgb(236, 240, 241)'; // Inactive star color
+				}
+			}
+		});
+
+		// Event delegation for mouseout
+		starsContainer.addEventListener('mouseout', function () {
+			// Reset star colors to their initial state on mouse out
+			const currentRating = hiddenInput.value;
+			for (let i = 0; i < starsContainer.children.length; i++) {
+				if (i < currentRating) {
+					starsContainer.children[i].style.color = '#f1c40f'; // Active star color
+				} else {
+					starsContainer.children[i].style.color = 'rgb(236, 240, 241)'; // Inactive star color
+				}
+			}
+		});
+
+		// Event delegation for click
+		starsContainer.addEventListener('click', function (event) {
+			if (event.target.tagName === 'I') {
+				// Handle rating submission logic
+				const clickedStarIndex = Array.from(starsContainer.children).indexOf(event.target);
+				const rating = clickedStarIndex + 1; // Corrected calculation
+				hiddenInput.value = rating;
+
+				// Prevent further mouseover effects after clicking
+				starsContainer.removeEventListener('mouseover', handleMouseover);
+			}
+		});
+	});
+</script>
+
+<script>
+
+	$('.growl-close').click(function () {
+		$('#growls-default').remove();
+
+	});
+</script>
+
+
+
+<script>
+
+	function updateSum() {
+		var sum = 0;
+		console.log(sum);
+		$('.nav-item').each(function () {
+			var price = parseFloat($(this).find('.price').text().replace('EGP ', ''));
+			var quantity = parseInt($(this).find('.qty').text().split(' ')[1]); // Extract quantity from text
+
+			sum += price * quantity;
+			console.log(price, quantity);
+		});
+
+		$('#navCartTotal').text('Total: EGP ' + sum);
+	}
+
+	$('#form2Submit').click(function () {
+
+		let quant = $("#quantitySelected").val();
+		var selectedValues = [];
+		$('.variation-dropdown').each(function () {
+			selectedValues.push($(this).val());
+		});
+
+
+		let id = $("#prdId").val();
+		$.ajax({
+			url: '/CartItem/AddToCart',// send to this action the data bellow
+			type: 'POST',
+			data: { id: parseInt(id), quantity: parseInt(quant), values: selectedValues },
+			success: function (data) {
+				var newCartItemCount = parseInt($('.cartCount').text()) + 1;
+				$('.cartCount').text(newCartItemCount);
+
+				// <a asp-action="Details" asp-controller="Cart" asp-route-id="${data.cartId}" class="open-file"></a>
+
+				var newItem = `
+					<div class="nav-item dropdown-item d-flex p-4" data-item-id="${data.id}">
+						<a href="/Cart/Details/"+${data.cartId} class="open-file"></a>
+						<span class="avatar avatar-xl br-5 me-3 align-self-center cover-image" data-bs-image-src="/Uploads/${data.image}"></span>
+						<div class="wd-50p">
+							<h5 class="mb-1">${data.name}</h5>
+							<p class="fs-13 text-muted mb-0 qty" data-item-id="${data.id}">Quantity: ${data.quantity}</p>
+						</div>
+						<div class="ms-auto text-end d-flex">
+							<span class="fs-16 text-dark d-none d-sm-block px-4 price">EGP ${data.price}</span>
+							<a class="fs-16 btn p-0 cart-trash delete-btn" data-item-id="${data.id}">
+								<i class="fe fe-trash-2 border text-danger brround d-block p-2"></i>
+							</a>
+						</div>
+					</div>`;
+
+				$('.header-dropdown-list.message-menu').append(newItem);
+				updateSum();
+
+				document.getElementById('growls-default').setAttribute('style', '');
+				setTimeout(function () {
+					$("#growls-default").fadeTo(500, 0).slideUp(300, function () {
+						$(this).remove();
+					});
+				}, 3000);
+			},
+			error: function () {
+				console.log('Error occurred while fetching options for the second dropdown.');
+			}
+		});
+	});
+
+</script>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

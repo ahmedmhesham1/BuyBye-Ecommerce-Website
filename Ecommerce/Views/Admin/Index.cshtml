@@ -1,0 +1,185 @@
+﻿@* @model List<Product>
+@{
+    Layout = "_ProfileLayout";
+}
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="row" style="width:90%;">
+        <div class="col-xl-5 col-lg-12 col-md-12">
+            <h1 class="mt-4"><b> Pending Products</b></h1>
+        </div>
+        <div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0" style="display: flex; align-items: center; justify-content: flex-end;">
+            <a href="/Admin/RejectAllProducts" class="btn ripple btn-danger"><i class="fe fe-trash-2"> </i> Reject All</a>
+            <t></t>
+            <a href="/Admin/ApproveAllProducts" class="btn ripple btn-success me-2" style="margin-left:10px;"><i class="fe fe-check"> </i> Approve All</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="card-body">
+    <div class="table-responsive">
+        <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+            <div class="col-sm-12">
+                <table class="table table-bordered border-bottom dataTable no-footer" id="basic-datatable" role="grid" aria-describedby="basic-datatable_info">
+                    <thead style="text-align:center;">
+                        <tr role="row">
+                            <th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="First name: activate to sort column ascending" style="width: 95.5156px;">
+                                Id
+                            </th>
+                            <th class="wd-15p border-bottom-0 sorting sorting_desc" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Last name: activate to sort column ascending" aria-sort="descending" style="width: 88.5469px;">
+                                Name
+                            </th>
+                            <th class="wd-20p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 178.531px;">
+                                Description
+                            </th>
+                            <th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 92.5312px;">
+                                Category
+                            </th>
+                            <th class="wd-25p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="E-mail: activate to sort column ascending" style="width: 185.141px;">
+                                Image
+                            </th>
+                            <th class="wd-10p border-bottom-0" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" style="width: 67.7031px;">
+                                Seller Name
+                            </th>
+                            <th class="wd-25p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="E-mail: activate to sort column ascending" style="width: 185.141px;">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center;">
+                        @foreach (var prd in Model)
+                        {
+                            <partial name="ProductApprovePV" model="prd" />
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> *@
+@model List<Product>
+@{
+    Layout = "_AdminLayout";
+}
+@*
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="row" style="width:90%;">
+        <div class="col-xl-5 col-lg-12 col-md-12">
+            <h1 class="mt-4"><b> Pending Products</b></h1>
+        </div>
+        <div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0" style="display: flex; align-items: center; justify-content: flex-end;">
+            <a href="/Admin/RejectAllProducts" class="btn ripple btn-danger"><i class="fe fe-trash-2"> </i> Reject All</a>
+            <t></t>
+            <a href="/Admin/ApproveAllProducts" class="btn ripple btn-success me-2" style="margin-left:10px;"><i class="fe fe-check"> </i> Approve All</a>
+        </div>
+    </div>
+</div> *@
+
+
+<div class="main-content app-content mt-0">
+    <div class="side-app">
+
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+
+            <div class="page-header">
+                <h1 class="page-title">Pending Products</h1>
+                <div>
+                    
+                </div>
+            </div>
+            <div class="row row-sm">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Products</h3>
+                            <div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0" style="display: flex; align-items: center; justify-content: flex-end;">
+                                <a href="/Admin/RejectAllProducts" class="btn ripple btn-danger"><i class="fe fe-trash-2"> </i> Reject All</a>
+                                <t></t>
+                                <a href="/Admin/ApproveAllProducts" class="btn ripple btn-success me-2" style="margin-left:10px;"><i class="fe fe-check"> </i> Approve All</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                    <div class="col-sm-12">
+                                        <table class="table table-bordered border-bottom dataTable no-footer" id="basic-datatable" role="grid" aria-describedby="basic-datatable_info">
+                                            <thead style="text-align:center;">
+                                                <tr role="row">
+                                                    <th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="First name: activate to sort column ascending" style="width: 95.5156px;">
+                                                        Id
+                                                    </th>
+                                                    <th class="wd-15p border-bottom-0 sorting sorting_desc" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Last name: activate to sort column ascending" aria-sort="descending" style="width: 88.5469px;">
+                                                        Name
+                                                    </th>
+                                                    <th class="wd-20p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 178.531px;">
+                                                        Description
+                                                    </th>
+                                                    <th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 92.5312px;">
+                                                        Category
+                                                    </th>
+                                                    <th class="wd-25p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="E-mail: activate to sort column ascending" style="width: 185.141px;">
+                                                        Image
+                                                    </th>
+                                                    <th class="wd-10p border-bottom-0" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" style="width: 67.7031px;">
+                                                        Seller Name
+                                                    </th>
+                                                    <th class="wd-25p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="E-mail: activate to sort column ascending" style="width: 185.141px;">
+                                                        Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="text-align:center;">
+                                                @foreach (var prd in Model)
+                                                {
+
+
+
+                                                    <tr>
+                                                        <td>
+                                                            @prd.Id
+                                                        </td>
+                                                        <td>
+                                                            @prd.Name
+                                                        </td>
+                                                        <td>
+                                                            @prd.Description
+                                                        </td>
+                                                        <td>
+                                                            @prd.Category.Name
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                <img style="width:auto;" src="~/Uploads/@prd.Image" alt="test img">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            @prd.Seller.Fname @prd.Seller.Lname
+                                                        </td>
+                                                        <td class="text-nowrap">
+                                                            <div class="btn-list mt-4">
+
+                                                                <a href="/Admin/RejectProduct/@prd.Id" class="btn ripple btn-danger"><i class="fe fe-trash-2"> </i> Reject</a>
+                                                                <a href="/Admin/ApproveProduct/@prd.Id" class="btn ripple btn-success me-2"><i class="fe fe-check"> </i> Approve</a>
+
+
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,522 @@
+﻿@{
+    Layout = "_AdminLayout";
+    
+   
+}
+<!--app-content open-->
+<div class="main-content app-content mt-0">
+	<div class="side-app">
+
+		<!-- CONTAINER -->
+		<div class="main-container container-fluid">
+
+			<!-- PAGE-HEADER -->
+			<div class="page-header">
+				<h1 class="page-title">Analytics</h1>
+				<div>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Tables</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Your Analytics</li>
+					</ol>
+				</div>
+			</div>
+			<!-- PAGE-HEADER END -->
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+					<div class="card overflow-hidden">
+						<div class="card-body">
+							<div class="d-flex">
+								<div class="mt-2">
+									<h6 class="">Total Users</h6>
+									<h2 class="mb-0 number-font">@ViewBag.UsersNum</h2>
+								</div>
+								<div class="ms-auto">
+									<div class="chart-wrapper mt-1">
+										<div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+										<canvas id="saleschart" class="h-8 w-9 chart-dropshadow chartjs-render-monitor" width="120" height="80" style="display: block; height: 64px; width: 96px;"></canvas>
+									</div>
+								</div>
+							</div>
+							@* <span class="text-muted fs-12">
+								<span class="text-secondary"><i class="fe fe-arrow-up-circle  text-secondary"></i> 5%</span>
+								Last week
+							</span> *@
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+					<div class="card overflow-hidden">
+						<div class="card-body">
+							<div class="d-flex">
+								<div class="mt-2">
+									<h6 class="">Total Products</h6>
+                                    <h2 class="mb-0 number-font">@ViewBag.ProductsNum </h2>
+								</div>
+								<div class="ms-auto">
+									<div class="chart-wrapper mt-1">
+										<div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+										<canvas id="leadschart" class="h-8 w-9 chart-dropshadow chartjs-render-monitor" width="120" height="80" style="display: block; height: 64px; width: 96px;"></canvas>
+									</div>
+								</div>
+							</div>
+							@* <span class="text-muted fs-12">
+								<span class="text-pink"><i class="fe fe-arrow-down-circle text-pink"></i> 0.75%</span>
+								Last 6 days
+							</span> *@
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+					<div class="card overflow-hidden">
+						<div class="card-body">
+							<div class="d-flex">
+								<div class="mt-2">
+									<h6 class="">Total Orders</h6>
+                                    <h2 class="mb-0 number-font">@ViewBag.OrdersNum</h2>
+								</div>
+								<div class="ms-auto">
+									<div class="chart-wrapper mt-1">
+										<div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+										<canvas id="profitchart" class="h-8 w-9 chart-dropshadow chartjs-render-monitor" width="120" height="80" style="display: block; height: 64px; width: 96px;"></canvas>
+									</div>
+								</div>
+							</div>
+							@* <span class="text-muted fs-12">
+								<span class="text-green"><i class="fe fe-arrow-up-circle text-green"></i> 0.9%</span>
+								Last 9 days
+							</span> *@
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+					<div class="card overflow-hidden">
+						<div class="card-body">
+							<div class="d-flex">
+								<div class="mt-2">
+									<h6 class="">Total Categories</h6>
+                                    <h2 class="mb-0 number-font">@ViewBag.CategoriesNum</h2>
+								</div>
+								<div class="ms-auto">
+									<div class="chart-wrapper mt-1">
+										<div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+										<canvas id="costchart" class="h-8 w-9 chart-dropshadow chartjs-render-monitor" width="120" height="80" style="display: block; height: 64px; width: 96px;"></canvas>
+									</div>
+								</div>
+							</div>
+							@* <span class="text-muted fs-12">
+								<span class="text-warning"><i class="fe fe-arrow-up-circle text-warning"></i> 0.6%</span>
+								Last year
+							</span> *@
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-9">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">Sales Analytics</h3>
+						</div>
+						<div class="card-body">
+							<div class="d-flex mx-auto text-center justify-content-center mb-4">
+								<div class="d-flex text-center justify-content-center me-3"><span class="dot-label bg-primary my-auto"></span>Total Sales</div>
+								@* <div class="d-flex text-center justify-content-center"><span class="dot-label bg-secondary my-auto"></span>Total Orders</div> *@
+							</div>
+							<div class="chartjs-wrapper-demo">
+								<div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                <div style="width: 800px; margin: 1px auto;" class="row">
+                                    <!-- Add canvas element for chart -->
+                                    <canvas id="salesChart"></canvas>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+				<!-- COL END -->
+				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-3">
+					<div class="card overflow-hidden">
+						<div class="card-body pb-0 bg-recentorder">
+							<h3 class="card-title text-white">Recent Orders</h3>
+							<div class="chartjs-wrapper-demo">
+								<div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+								<canvas id="recentorders" class="chart-dropshadow chartjs-render-monitor" height="281" style="display: block; height: 225px; width: 228px;" width="285"></canvas>
+							</div>
+						</div>
+						<div id="flotback-chart" class="flot-background" style="padding: 0px;"><canvas class="flot-base" width="347" height="375" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 278.3px; height: 300px;"></canvas><canvas class="flot-overlay" width="347" height="375" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 278.3px; height: 300px;"></canvas></div>
+						<div class="card-body">
+							<div class="d-flex mb-4 mt-3">
+								<div class="avatar avatar-md bg-secondary-transparent text-secondary bradius me-3">
+									<i class="fe fe-check"></i>
+								</div>
+								<div class="">
+									<h6 class="mb-1 fw-semibold">Delivered Orders</h6>
+									<p class="fw-normal fs-12">
+										<span class="text-success"></span>
+										increased
+									</p>
+								</div>
+								<div class=" ms-auto my-auto">
+                                    <p class="fw-bold fs-20">@ViewBag.OrdersNum</p>
+								</div>
+							</div>
+							<div class="d-flex">
+								<div class="avatar  avatar-md bg-pink-transparent text-pink bradius me-3">
+									<i class="fe fe-x"></i>
+								</div>
+								<div class="">
+									<h6 class="mb-1 fw-semibold">Pending Orders</h6>
+									<p class="fw-normal fs-12">
+										@* <span class="text-success">1.2%</span> *@
+										Preparing
+									</p> 
+								</div>
+								<div class=" ms-auto my-auto">
+                                    <p class="fw-bold fs-20 mb-0">3</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- COL END -->
+			</div>
+
+
+            
+
+        </div>
+
+
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    url: '/Admin/GetSalesData',
+                    type: 'GET',
+                    success: function (data) {
+                        renderChart(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+
+            function renderChart(data) {
+                var months = [];
+                var sales = [];
+
+                // enter all months data, also get the names of the months
+                for (var i = 0; i < 12; i++) { // Start from 0 to add space before January
+                    var monthIndex = i + 1; // Adjust month index
+                    var monthData = data.find(item => item.month === monthIndex);
+                    if (monthData) {
+                        sales.push(monthData.totalSales);
+                    } else {
+                        sales.push(0);
+                    }
+                    months.push(new Date(2000, monthIndex - 1, 1).toLocaleString('default', { month: 'short' })); // Get abbreviated month name
+                }
+
+                var ctx = document.getElementById('salesChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: 'Total Sales',
+                            data: sales,
+                            backgroundColor: 'rgba(108, 95, 252, 0.1)',
+                            borderColor: 'rgb(108, 95, 252)',
+                            borderWidth: 2,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    stepSize: 5000
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+
+        </script>
+
+
+        <script>
+            $(document).ready(function () {
+                var totalOrders = 0;
+                var targetOrders = @ViewBag.OrdersNum;
+
+                var interval = setInterval(function () {
+                    if (totalOrders < targetOrders) {
+                        totalOrders++;
+                        $('#totalOrders').text(totalOrders);
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 200);
+            });
+        </script>
+
+
+        <script>
+            $(document).ready(function () {
+                var totalUsers = 0;
+                var targetUsers = @ViewBag.UsersNum;
+
+                var interval = setInterval(function () {
+                    if (totalUsers < targetUsers) {
+                        totalUsers++;
+                        $('#totalUsers').text(totalUsers);
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 200);
+            });
+        </script>
+		</div>
+		<!-- CONTAINER CLOSED -->
+
+	</div>
+</div>
+<!--app-content closed-->
+
+
+<script>
+    function index() {
+        'use strict'
+
+        // TRANSACTIONS
+        var myCanvas = document.getElementById("transactions");
+        myCanvas.height = "330";
+
+        var myCanvasContext = myCanvas.getContext("2d");
+        var gradientStroke1 = myCanvasContext.createLinearGradient(0, 80, 0, 280);
+        gradientStroke1.addColorStop(0, hexToRgba(myVarVal, 0.8) || 'rgba(108, 95, 252, 0.8)');
+        gradientStroke1.addColorStop(1, hexToRgba(myVarVal, 0.2) || 'rgba(108, 95, 252, 0.2) ');
+
+        var gradientStroke2 = myCanvasContext.createLinearGradient(0, 80, 0, 280);
+        gradientStroke2.addColorStop(0, hexToRgba(myVarVal1, 0.8) || 'rgba(5, 195, 251, 0.8)');
+        gradientStroke2.addColorStop(1, hexToRgba(myVarVal1, 0.8) || 'rgba(5, 195, 251, 0.2) ');
+        document.getElementById('transactions').innerHTML = '';
+        var ordersList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        var ordersFromDb = [11, 22, 33, 44, 55, 66, 77, 88, 99, 10, 11, 12]
+        var myChart;
+        myChart = new Chart(myCanvas, {
+
+            type: 'line',
+            data: {
+                labels: ["Janz", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                type: 'line',
+                datasets: [
+                    {
+                        label: 'Total Sales',
+                        data: [100, 210, 180, 454, 454, 230, 230, 656, 656, 350, 350, 210],
+                        backgroundColor: gradientStroke1,
+                        borderColor: myVarVal,
+                        pointBackgroundColor: '#fff',
+                        pointHoverBackgroundColor: gradientStroke1,
+                        pointBorderColor: myVarVal,
+                        pointHoverBorderColor: gradientStroke1,
+                        pointBorderWidth: 0,
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        borderWidth: 3,
+                        fill: 'origin'
+                    }, {
+                        label: 'Total Orders',
+                        data: ordersFromDb,/*[200, 530, 110, 110, 480, 520, 780, 435, 475, 738, 454, 454],*/
+                        backgroundColor: 'transparent',
+                        borderColor: '#05c3fb',
+                        pointBackgroundColor: '#fff',
+                        pointHoverBackgroundColor: gradientStroke2,
+                        pointBorderColor: '#05c3fb',
+                        pointHoverBorderColor: gradientStroke2,
+                        pointBorderWidth: 0,
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        borderWidth: 3,
+                        fill: 'origin',
+
+                    }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                tooltips: {
+                    enabled: false,
+                },
+                legend: {
+                    display: false,
+                    labels: {
+                        usePointStyle: false,
+                    },
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: false,
+                            drawBorder: false,
+                            color: 'rgba(119, 119, 142, 0.08)'
+                        },
+                        ticks: {
+                            fontColor: '#b0bac9',
+                            autoSkip: true,
+                        },
+                        scaleLabel: {
+                            display: false,
+                            labelString: 'Month',
+                            fontColor: 'transparent'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 1050,
+                            stepSize: 150,
+                            fontColor: "#b0bac9",
+                        },
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            drawBorder: false,
+                            zeroLineColor: 'rgba(142, 156, 173,0.1)',
+                            color: "rgba(142, 156, 173,0.1)",
+                        },
+                        scaleLabel: {
+                            display: false,
+                            labelString: 'sales',
+                            fontColor: 'transparent'
+                        }
+                    }]
+                },
+                title: {
+                    display: false,
+                    text: 'Normal Legend'
+                }
+            }
+        });
+    }
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/Admin/GetSalesData',
+            type: 'GET',
+            success: function (data) {
+                renderChart(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+
+    function renderChart(data) {
+        var months = [];
+        var sales = [];
+
+        // enter all months data, also get the names of the months
+        for (var i = 0; i < 12; i++) { // Start from 0 to add space before January
+            var monthIndex = i + 1; // Adjust month index
+            var monthData = data.find(item => item.month === monthIndex);
+            if (monthData) {
+                sales.push(monthData.totalSales);
+            } else {
+                sales.push(0);
+            }
+            months.push(new Date(2000, monthIndex - 1, 1).toLocaleString('default', { month: 'short' })); // Get abbreviated month name
+        }
+
+        var ctx = document.getElementById('salesChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Total Sales',
+                    data: sales,
+                    backgroundColor: 'rgba(108, 95, 252, 0.1)',
+                    borderColor: 'rgb(108, 95, 252)',
+                    borderWidth: 2,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            stepSize: 5000
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+
+</script>
+
+
+@* <script>
+    $(document).ready(function () {
+        var totalOrders = 0;
+        var targetOrders = @ViewBag.OrdersNum;
+
+        var interval = setInterval(function () {
+            if (totalOrders < targetOrders) {
+                totalOrders++;
+                $('#totalOrders').text(totalOrders);
+            } else {
+                clearInterval(interval);
+            }
+        }, 200);
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        var totalUsers = 0;
+        var targetUsers = @ViewBag.UsersNum;
+
+        var interval = setInterval(function () {
+            if (totalUsers < targetUsers) {
+                totalUsers++;
+                $('#totalUsers').text(totalUsers);
+            } else {
+                clearInterval(interval);
+            }
+        }, 200);
+    });
+</script>  *@

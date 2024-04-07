@@ -1,0 +1,186 @@
+﻿@model Ecommerce.Models.Wishlist
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<!doctype html>
+<html lang="en" dir="ltr">
+
+
+
+<body class="app sidebar-mini ltr">
+
+
+    <!--app-content open-->
+    <div class="main-content app-content mt-0">
+        <div class="side-app">
+
+            <!-- CONTAINER -->
+            <div class="main-container container-fluid">
+
+                <!-- PAGE-HEADER -->
+                <div class="page-header">
+                    <h1 class="page-title">Wishlist</h1>
+                    <div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">E-Commerce</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- PAGE-HEADER END -->
+                <!-- ROW-1 OPEN -->
+                <div class="row row-cards">
+                    <!-- COL-END -->
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card p-0">
+                                    <div class="card-body p-4">
+                                        <div class="row">
+                                            <div class="col-xl-5 col-lg-6 col-md-5 col-sm-6">
+                                                <div class="input-group d-flex w-100 float-start my-1">
+                                                    <input type="text" class="form-control" placeholder="Search ...">
+                                                    <button class="btn input-group-text bg-transparent text-muted">
+                                                        <i class="fa fa-search fs-16" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-7 col-lg-6 col-md-7 col-sm-6">
+                                                <div class="float-sm-end float-none my-1">
+                                                    @*<a href="cart.html" class="btn btn-primary me-2">Add All to Cart</a>
+                                                    *@
+                                                    <button id="clear" class="btn btn-primary">Clear All</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-11">
+                                <div class="row">
+                                    @foreach (Product product in Model.Products)
+                                    {
+                                        <div class="col-sm-6 col-md-6 col-xl-3 alert" data-item-id="@product.Id">
+                                            <div class="card">
+                                                <div class="product-grid6">
+                                                    <div class="product-image6 p-5">
+
+                                                        <a href="/Product/Details/@product.Id">
+                                                            <img class="img-fluid br-7 w-100" src="~/Uploads/@product.Image" style="height:210px; width:100%; object-fit:contain;" alt="@product.Name">
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-body pt-0">
+                                                        <div class="product-content text-center">
+                                                            <h1 class="title fw-bold fs-20"><a href="/Product/Details/@product.Id">@product.Name</a></h1>
+                                                            @if (product.Reviews?.Count > 0)
+                                                            {
+                                                                int sum = 0, count = 0, average = 0;
+
+                                                                foreach (Review review in product.Reviews)
+                                                                {
+                                                                    count++;
+                                                                    sum += (int)review.Rating;
+                                                                }
+
+                                                                average = sum / count;
+
+                                                                <span class="fw-bold text-success">
+                                                                    @for (int i = 0; i < average; i++)
+                                                                    {
+                                                                        <span class="fa fa-star text-warning"></span>
+                                                                    }
+                                                                </span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="fw-bold text-success">
+                                                                    No Reviews Yet
+                                                                </span>
+                                                            }
+
+                                                            <div class="price mb-2">EGP @product.Price</div>
+                                                            @if (product?.Items?.Count > 0)
+                                                            {
+                                                                <span class="text-success fs-18 fw-semibold">In Stock</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="text-danger fs-18 fw-semibold">Out-of-Stock</span>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer text-center">
+                                                        <a href="/Product/Details/@product.Id" class="btn btn-primary mx-2 mb-1 w-sm"><i class="fe fe-shopping-cart me-2"></i>View Options</a>
+                                                        <button class="removePrd btn btn-danger mx-2 mb-1 w-sm" data-item-id="@product.Id"><i class="fe fe-trash me-2"></i>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+
+
+                                </div>
+                            </div>
+                            <!-- COL-END -->
+                        </div>
+                        <!-- ROW-1 CLOSED -->
+                    </div>
+                    <!-- ROW-1 END-->
+                </div>
+                <!-- CONTAINER CLOSED -->
+            </div>
+        </div>
+        <!--app-content closed-->
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#clear').click(function () {
+                $.ajax({
+                    url: '/Wishlist/ClearAllprds',
+                    type: 'POST',
+                    success: function (response) {
+                        $('.alert').empty();
+
+                        console.log("Action executed successfully");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error occurred while executing action:", error);
+                    }
+                });
+            });
+
+            $('.removePrd').click(function () {
+                console.log("here");
+                var prdId = $(this).data('item-id');
+                var $productCard = $('.alert[data-item-id="' + prdId + '"]');
+
+                $.ajax({
+                    url: '/Wishlist/RemovePrd',
+                    type: 'POST',
+                    data: { prdId: prdId },
+                    success: function (response) {
+                        console.log("Action executed successfully");
+                        $productCard.remove();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error occurred while executing action:", error);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

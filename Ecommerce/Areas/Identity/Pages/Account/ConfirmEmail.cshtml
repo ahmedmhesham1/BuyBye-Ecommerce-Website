@@ -1,0 +1,18 @@
+﻿@page
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "Confirm email";
+    Layout = "_IdentityLayout";
+}
+<div class="container">
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="offset-md-4 col-md-4" style="text-align:center ;color:white">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+    </div>
+</div>
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />

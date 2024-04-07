@@ -1,0 +1,33 @@
+﻿@model Ecommerce.Models.Product
+
+<tr>
+    <td>
+        @Model.Id
+    </td>
+    <td>
+        @Model.Name
+    </td>
+    <td>
+        @Model.Description
+    </td>
+    <td>
+        @Model.Category.Name
+    </td>
+    <td>
+        <div>
+            <img style="width:auto;" src="~/Uploads/@Model.Image" alt="test img">
+        </div>
+    </td>
+    <td>
+        @Model.Seller.Fname @Model.Seller.Lname
+    </td>
+    <td class="text-nowrap">
+        <div class="btn-list mt-4">
+
+            <a href="/Admin/RejectProduct/@Model.Id" class="btn ripple btn-danger"><i class="fe fe-trash-2"> </i> Reject</a>
+            <a href="/Admin/ApproveProduct/@Model.Id" class="btn ripple btn-success me-2"><i class="fe fe-check"> </i> Approve</a>
+
+
+        </div>
+    </td>
+</tr>

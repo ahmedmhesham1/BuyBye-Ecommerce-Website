@@ -1,0 +1,73 @@
+﻿@{
+    List<CartItem> cartItems = ViewBag.cartItem;
+    int total = 0;
+}
+
+<!--app-content open-->
+<div class="main-content app-content mt-0">
+    <div class="side-app">
+
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+
+            <!-- PAGE-HEADER -->
+            <div class="page-header">
+                <h1 class="page-title">Checkout</h1>
+                <div>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">E-Commerce</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Checkout Address</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Checkout Order Details</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- PAGE-HEADER END -->
+            <div class="row">
+
+                <div class="offset-xl-2 col-xl-8 col-md-12">
+                    <div class="card cart">
+                        <div class="card-header">
+                            <h3 class="card-title">Your Order</h3>
+                        </div>
+                        <div class="card-body">
+                            @foreach (var item in cartItems)
+                            {
+                                total += (int)item.Quantity * (int)item.ProductItem.Product.Price;
+                                <div class="mt-5">
+                                <div class="d-flex">
+                                        <img class="avatar-xxl br-7" src="/Uploads/@item.ProductItem.Product.Image" style="height:100px; width:auto; object-fit:contain" alt="img">
+                                    <div class="ms-3">
+                                        <h4 class="mb-1 fw-semibold fs-14"><a asp-controller="Product" asp-action="Details" asp-route-id="@item.ProductItem.ProductId">@item.ProductItem.Product.Name</a></h4>
+                                            <p>@item.ProductItem.Product.Description</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                            <span class="fs-16 fw-semibold">@item.ProductItem.Product.Price * @item.Quantity</span>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                            }
+                            
+                            <ul class="list-group border br-7 mt-5">
+                                <li class="list-group-item border-0">
+                                    Shipping
+                                    <span class="h6 fw-bold mb-0 float-end">Free</span>
+                                </li>
+                                <li class="list-group-item border-0">
+                                    Total
+                                    <span class="h4 fw-bold mb-0 float-end">@total EGP</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer text-end">
+                            <a asp-controller="Checkout" asp-action="PaymentInfo" class="btn btn-primary"  id="click-payment">Place Order</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- CONTAINER CLOSED -->
+
+    </div>
+</div>
+<!--app-content closed-->

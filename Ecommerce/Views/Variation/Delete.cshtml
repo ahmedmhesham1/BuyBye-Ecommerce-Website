@@ -1,0 +1,65 @@
+﻿@model Ecommerce.Models.Variation
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="row" style="width:90%;">
+        <div class="col-xl-5 col-lg-12 col-md-12">
+            <h1 class="mt-4"><b> Delete Variation</b></h1>
+        </div>
+       
+    </div>
+</div>
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="container" style="width:90%;">
+            <div class="card">
+                <form asp-action="Delete" method="post">
+                <div class="card-body">
+                <h3 class="mt-4 text-danger"><b> Are you sure you want to delete this variation?</b></h3>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class=" row mb-2">
+                        <label for="inputName" class="col-md-2 form-label">Variation Name: </label>
+                        <div class="col-md-10">
+                            <p class="form-label">@Model.Name</p>
+                        </div>
+                    </div>
+                    <div class=" row mb-2">
+                        <label for="inputdesc" class="col-md-2 form-label" style="margin-top:50px;">Variation Options: </label>
+                        <div class="col-md-10" style="margin-top:48px;">
+                            @if (@Model.Options.Count() == 0)
+                            {
+                                <span class="badge rounded-pill bg-danger badge-sm me-1 mb-1 mt-1" style="font-size: 1rem; margin-right:5px;">No Options</span>
+                            }
+                            else
+                            {
+                                
+                            
+                                @foreach (var o in @Model.Options)
+                                {
+
+                                    <span class="badge rounded-pill bg-primary badge-sm me-1 mb-1 mt-1" style="font-size: 1rem; margin-top:50px; margin-right:5px;">@o.Value</span>
+
+                                 }
+                            }
+                        </div>
+                    </div>
+                
+                    <div style="display:flex;justify-content: flex-end;">
+                        <div class="btn-list mt-4">
+                            <input type="submit" asp-route-id="@Model?.Id" class="btn ripple btn-danger" value="Delete Variation"/>               
+                            <a asp-action="Create" asp-route-Id="@Model?.CategoryId" class="btn ripple btn-primary"> Keep Variation </a>
+                        </div>
+                    </div>
+            </form>
+        </div>
+            </div>
+        </div>
+</div>

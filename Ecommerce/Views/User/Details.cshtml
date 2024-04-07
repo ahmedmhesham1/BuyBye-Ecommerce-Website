@@ -1,0 +1,55 @@
+﻿@{
+	Layout = "_Layout";
+	var SellerPrd = (List<Product>)ViewBag.SellerPrds;
+	var Orders = (List<Order>)ViewBag.LatestOrders;
+}
+@model User
+@{
+	ViewData["Title"] = "Index";
+}
+<!--app-content open-->
+<!-- PAGE-HEADER -->
+<div class="container">
+
+<div class="page-header">
+	<h1 class="page-title">Edit Personal Details</h1>
+</div>
+<!-- PAGE-HEADER END -->
+<!-- Row -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Edit Personal Details</h3>
+
+                <a href="/User/Edit" class="btn btn-primary" style="margin-left:auto">Edit</a>
+
+			</div>
+            <div class="card-body">
+			    <form action="Edit" method="post" class="form-horizontal">
+                       <div asp-validation-summary="All" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class=" row mb-2">
+                            <label for="inputName" class="col-md-2 form-label">Name:</label>
+                        <label for="inputName" class="col-md-2 form-label">@Model.Fname &ensp; @Model.Lname</label>
+
+                    </div>
+                        <div class=" row mb-2">
+                            <label for="inputName" class="col-md-2 form-label">E-Mail:</label>
+                            <label for="inputName" class="col-md-2 form-label">@Model.Email</label>
+                        </div>
+                  
+                    <div class=" row mb-2">
+                        <label for="inputName" class="col-md-2 form-label">Address:</label>
+                        <label for="inputName" class="col-md-2 form-label">@Model.Address.UnitNumber, @Model.Address.StreetName, @Model.Address.City, @Model.Address.Country</label>
+
+                       
+
+                    </div>
+                   
+                    
+		    </form>
+		</div>
+	</div>
+</div>
+    </div>

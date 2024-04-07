@@ -1,0 +1,46 @@
+﻿@* @page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+<header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">You do not have access to this resource.</p>
+</header>
+ *@
+
+ @page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Login Required";
+}
+
+@* <header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">You have to login to add items to the cart</p>
+</header>
+<div class="card-body modal-dialog-centered">
+    <h5 class="card-title">Login Required</h5>
+    <p class="card-text" You have to login to add items to the cart. </p>
+    <a href="javascript:void(0)" class="btn btn-primary">Go Login</a>
+</div> *@
+    <div class="col-xl-3 col-sm-6" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%)">
+        <div class="card border p-0 pb-3">
+            <div class="card-header border-0 pt-3">
+            </div>
+            <div class="card-body text-center">
+                <span class=""><svg xmlns="http://www.w3.org/2000/svg" height="60" width="60" viewBox="0 0 24 24"><path fill="#fad383" d="M15.728,22H8.272a1.00014,1.00014,0,0,1-.707-.293l-5.272-5.272A1.00014,1.00014,0,0,1,2,15.728V8.272a1.00014,1.00014,0,0,1,.293-.707l5.272-5.272A1.00014,1.00014,0,0,1,8.272,2H15.728a1.00014,1.00014,0,0,1,.707.293l5.272,5.272A1.00014,1.00014,0,0,1,22,8.272V15.728a1.00014,1.00014,0,0,1-.293.707l-5.272,5.272A1.00014,1.00014,0,0,1,15.728,22Z"></path><circle cx="12" cy="16" r="1" fill="#f7b731"></circle><path fill="#f7b731" d="M12,13a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v4A1,1,0,0,1,12,13Z"></path></svg></span>
+                <h4 class="h4 mb-0 mt-3">Login Required</h4>
+                <p class="card-text">You don't have a permission to access this page</p>
+            </div>
+            <div class="card-footer text-center border-0 pt-0">
+                <div class="row">
+                    <div class="text-center">
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-white me-2">Back</a>
+                        <a href="/Identity/Account/Login" class="btn btn-warning">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

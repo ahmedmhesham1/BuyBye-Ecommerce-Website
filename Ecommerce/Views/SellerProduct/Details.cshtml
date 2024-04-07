@@ -1,0 +1,187 @@
+﻿@model Ecommerce.Models.Product
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+
+@{
+	var numOfStars = ViewBag.ratingSum / ViewBag.ratingCount;
+}
+
+<!-- PAGE -->
+<div class="page">
+	<div class="page-main">
+
+		<!-- app-Header -->
+		<!-- /app-Header -->
+		<!-- APP-SIDEBAR-->
+		<!--/APP-SIDEBAR -->
+		<!--app-content open-->
+		<div class="main-content app-content mt-0">
+			<div class="side-app">
+
+				<!-- CONTAINER -->
+				<div class="main-container container-fluid">
+
+					<!-- PAGE-HEADER -->
+					<div class="page-header">
+						<h1 class="page-title">Product Details</h1>
+						<div>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="javascript:void(0)">E-Commerce</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Product Details</li>
+							</ol>
+						</div>
+					</div>
+					<!-- PAGE-HEADER END -->
+					<!-- ROW-1 OPEN -->
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="row row-sm">
+										<div class="col-xl-5 col-lg-12 col-md-12">
+											<div class="row">
+												<div class="col-xl-12">
+													<div class="product-carousel">
+														<img style="height:auto; width:auto" src="~/Uploads/@Model.Image" alt="test img">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0">
+											<div class="mt-2 mb-4">
+												<h3 class="mb-3 fw-semibold">@Model.Name</h3>
+												<p class="text-muted mb-4">( @(Model.Reviews?.Count ?? 0) Customers Reviews) </p>
+
+												<h4 class="mt-4"><b> Description</b></h4>
+												<p>
+													@Model.Description
+												</p>
+												<div class=" mt-4 mb-5">
+													<span class="fw-bold me-2">Category: </span><span class="fw-bold text-success">@Html.DisplayFor(model => model.Category.Name)</span>
+												</div>
+												<h3 class="mb-4"><span class="me-2 fw-bold fs-25">@Model.Price EGP</span></h3>
+
+												<div class=" mt-4 mb-5">
+													<span class="fw-bold me-2">Rating: </span>
+													<span class="fw-bold text-success">
+
+														@for (int i = 0; i < numOfStars; i++)
+														{
+															<span class="fa fa-star text-warning"></span>
+														}
+													</span>
+												</div>
+												<div class=" mt-4 mb-5"><span class="fw-bold me-2">Availability: </span><span class="fw-bold text-success">In Stock</span></div>
+												<div class="row row-sm">
+													<div class="col">
+														<div class="mb-2 me-2 sizes">
+
+															<div class=" mt-4 mb-5">
+																<span class="fw-bold me-2">Approved: </span><span class="fw-bold text-success">@Html.DisplayFor(model => model.IsApproved)</span>
+															</div>
+
+
+														</div>
+													</div>
+												</div>
+												<hr>
+												<div class="btn-list mt-4">
+													<a asp-action="Edit" asp-route-id="@Model?.Id" class="btn ripple btn-primary me-2"><i class="fe fe-edit"> </i>Edit</a> |
+													<a asp-action="Index" class="btn ripple btn-secondary"><i class="fe fe-skip-back"> </i>Back to List</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-6">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Your Product Items</h3>
+								</div>
+								<div class="card-body">
+									<p>All your Product Items with their Specs and Availability.</p>
+									<div class="table-responsive">
+										<table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+											<thead>
+												<tr>
+													<th>Specs</th>
+													<th>Quantity in stock</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach (ProductItem PrdItem in ViewBag.ProductItemsList)
+												{
+													<tr>
+														<td>
+															<ul>
+																@foreach (var v in PrdItem.Configurations)
+																{
+																	<li>
+																		@v.Value
+																	</li>
+																}
+															</ul>
+														</td>
+														<td>@PrdItem.QuantityInStock</td>
+													</tr>
+												}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-xl-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Reviews</div>
+								</div>
+								<div class="card-body">
+									<div class="media mb-5">
+
+										<div class="media-body">
+											@if (Model.Reviews?.Count > 0)
+											{
+												int j = 0;
+
+												foreach (Review review in Model.Reviews)
+												{
+													@for (int i = 0; i < ViewBag.reviewRating[j].Rating; i++)
+													{
+														<span class="fa fa-star text-warning"></span>
+													}
+													<h5 class="mt-0 mb-0">@review.Customer.UserName</h5>
+													<p class="font-13 text-muted">@review.Comment</p>
+
+													j++;
+
+												}
+											}
+											else
+											{
+												<p class="font-13 text-muted">No Comments yet</p>
+											}
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- ROW-1 CLOSED -->
+				</div>
+				<!-- CONTAINER CLOSED -->
+			</div>
+		</div>
+		<!--app-content closed-->
+	</div>
+</div>

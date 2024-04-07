@@ -1,0 +1,132 @@
+﻿@model List<Order>
+
+
+<!--app-content open-->
+<div class="main-content app-content mt-0">
+    <div class="side-app">
+
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+
+<div class="page-header">
+    <h1 class="page-title">Your Dashboard</h1>
+    <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Orders</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Your Dashboard</li>
+        </ol>
+    </div>
+</div>
+<div class="row row-sm">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Your Orders</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered border-bottom dataTable no-footer" id="basic-datatable" role="grid" aria-describedby="basic-datatable_info">
+                                <thead style="text-align:center;">
+                                    <tr role="row">
+                                        <th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="First name: activate to sort column ascending" style="width: 95.5156px;">
+                                            Customer
+                                        </th>
+                                        <th class="wd-15p border-bottom-0 sorting sorting_desc" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Last name: activate to sort column ascending" aria-sort="descending" style="width: 88.5469px;">
+                                            Phone Number
+                                        </th>
+                                        <th class="wd-20p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 178.531px;">
+                                            Order Price
+                                        </th>
+                                        <th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 92.5312px;">
+                                            Order Date
+                                        </th>
+                                        <th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 92.5312px;">
+                                            Deliver Date
+                                        </th>
+                                        <th class="wd-15p border-bottom-0 sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 92.5312px;">
+                                            Status
+                                        </th>
+                                        <th class="wd-15p border-bottom-0" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 92.5312px;">
+                                            Action
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                 <tbody style="text-align:center;">
+                                    @foreach (var order in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @order.User.Fname
+                                            </td>
+                                            <td>
+                                                @order.PhoneNumber
+                                            </td>
+                                            <td>
+                                                @order.TotalPrice
+                                            </td>
+                                            <td>
+                                                @order.OrderDate
+                                            </td>
+                                            <td>
+                                                @order.DeliverDate
+                                            </td>
+                                            <td id="status-@order.Id">
+                                                @*  Preparing, Shipped, Delivered, Cancelled *@
+                                                @if (order.OrderStatus == Status.Delivered)
+                                                {
+                                                    <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Delivered</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">@order.OrderStatus</span>
+                                                }
+                                            </td>
+                                            <td class="text-nowrap">
+                                                @if (order.OrderStatus != Status.Delivered)
+                                                {
+                                                    @* <form method="post"> *@
+                                                        <input id="orderId-@order.Id" value="@order.Id" hidden />
+                                                                <button id="bSubmit-@order.Id" class="btn btn-sm btn-success" onclick="markAsDelivered('@order.Id')" >Mark as Delivered</button>
+                                                    @* </form> *@
+                                                }
+
+                                                
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody> 
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function markAsDelivered(orderId) {
+        let id = orderId;
+        let newItem = `<span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Delivered</span>`
+        $.ajax({
+            url: '/sellerProduct/approveOrders',// send to this action the data bellow
+            type: 'POST',
+            data: { orderId: parseInt(id) },
+            success: function (data) {
+                console.log(id);
+                document.getElementById(`status-${id}`).innerHTML = newItem;
+                $(`#bSubmit-${id}`).hide();
+            },
+            error: function () {
+                console.log('Error occurred while fetching options for the second dropdown.');
+            }
+        });
+    }
+        
+</script>

@@ -1,0 +1,59 @@
+﻿/*#pictureCard {
+    box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+    border-radius: 6px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#pictureCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 2px 15px rgb(0 0 0 / 20%);
+}*/
+
+#applyBtn {
+    padding: 8px 12px;
+    background-color: #fff;
+    color: #6c5ffc;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid #6c5ffc;
+    border-radius: 5px;
+    height: 37px;
+}
+    #applyBtn:hover {
+        background-color: #6c5ffc;
+        color: #fff;
+    }
+
+input[name="minPrice"] {
+    margin-bottom: 10px;
+    margin-left: 25px;
+    padding: 5px;
+    height: 37px;
+    width: 80px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+input[name="maxPrice"] {
+    margin-bottom: 10px;
+    margin-left: 15px;
+    padding: 5px;
+    height: 37px;
+    width: 80px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+    input[name="minPrice"]:focus,
+    input[name="maxPrice"]:focus {
+        border-color: #6c5ffc;
+        outline: none;
+    }
+#oops {
+    color: #282f53;
+    font-size:30px;
+    font-weight:bold;
+}
+#notFoundBox{
+    text-align:center;
+}

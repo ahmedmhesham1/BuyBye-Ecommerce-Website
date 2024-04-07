@@ -1,0 +1,101 @@
+﻿@model Ecommerce.Models.ProductItem
+
+
+@* @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} *@
+
+
+@{
+	ViewData["Title"] = "Create";
+}
+<div class="page">
+	<div class="page-main">
+
+		<div class="main-content app-content mt-0">
+			<div class="side-app">
+
+				<!-- CONTAINER -->
+				<div class="main-container container-fluid">
+
+					<!-- PAGE-HEADER -->
+					<div class="page-header">
+						<h1 class="page-title">Add Product Item</h1>
+						<div>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="javascript:void(0)">Pages</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Add Product Item</li>
+							</ol>
+						</div>
+					</div>
+					<!-- PAGE-HEADER END -->
+					<!-- ROW-1 OPEN -->
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Add Product Item and Select Variations for your Item</div>
+								</div>
+								<form asp-action="Create" enctype="multipart/form-data">
+									<div asp-validation-summary="All" class="text-danger"></div>
+									<div class="card-body">
+										<div class="row mb-4">
+											<label class="col-md-3 form-label"></label>
+											<div class="col-md-9">
+												<label asp-for="ProductId" class="control-label" hidden></label>
+												<input asp-for="ProductId" class="form-control" value="@ViewBag.prdId" hidden />
+											</div>
+										</div>
+
+										@foreach (Variation v in ViewBag.variations)
+										{
+											<div class="row mb-4">
+												<label class="col-md-3 form-label">@v.Name :</label>
+												<div class="col-md-9">
+													@{
+														SelectList varSL = new SelectList(v.Options, "Id", "Value");
+													}
+													<select name="Value" class="form-control" asp-items="varSL"></select>
+												</div>
+											</div>
+										}
+
+										<div class="row mb-4">
+											<label class="col-md-3 form-label">Quantity In Stock :</label>
+											<div class="col-md-9">
+												<input asp-for="QuantityInStock" class="form-control" />
+											    <span asp-validation-for="QuantityInStock" class="text-danger"></span>
+
+											</div>
+										</div>
+									</div>
+									<div class="card-footer">
+										<!--Row-->
+										<div class="row">
+											<div class="col-md-3"></div>
+											<div class="col-md-9">
+												<input type="submit" class="btn btn-lg btn-primary" value="Add Product Item" />
+												<a asp-action="Index" asp-controller="SellerProduct" class="btn btn-lg btn-secondary float-end">Return to Dashboard</a>
+											</div>
+										</div>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+						<!--End Row-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /ROW-1 CLOSED -->
+	</div>
+	<!-- CONTAINER CLOSED -->
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

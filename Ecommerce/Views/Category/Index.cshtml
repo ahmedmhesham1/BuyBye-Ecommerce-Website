@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Ecommerce.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="row" style="width:90%;">
+        <div class="col-xl-5 col-lg-12 col-md-12">
+            <h1 class="mt-4"><b> All Categories</b></h1>
+        </div>
+        <div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0" style="display: flex; align-items: center; justify-content: flex-end;">
+            <a asp-action="Create" class="btn btn-primary btn-block float-end my-2"><i class="fa fa-plus-square me-2"></i>New Category</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="container" style="width:90%;">
+        <div class="table-responsive">
+            <table class="table border table-striped mb-0 table-hover" style="background-color:white;">
+                <thead>
+                    <tr>
+                        <th style="width: 17%;">
+                            <!-- Adjusted width to distribute evenly -->
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th style="width: 47%;">
+                            <!-- Adjusted width to distribute evenly -->
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th style="width: 29%;">
+                            Edit
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                    <p>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </p>
+    
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn ripple btn-info me-2" style="margin-left:7px;"><i class="fa fa-pencil"> </i> Edit </a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn ripple btn-warning me-2" style="margin-left:7px;"><i class="fa fa-list-alt"> </i> Details </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn ripple btn-danger me-2" style="margin-left:7px;"><i class="fe fe-trash"> </i> Delete </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

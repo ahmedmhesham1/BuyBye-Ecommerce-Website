@@ -1,0 +1,264 @@
+﻿@model Ecommerce.Models.User
+@{
+    User user = ViewBag.user;
+}
+
+<!--app-content open-->
+<div class="main-content app-content mt-0">
+    <div class="side-app">
+
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+
+            <!-- PAGE-HEADER -->
+            <div class="page-header">
+                <h1 class="page-title">Checkout</h1>
+                <div>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">E-Commerce</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Checkout Address</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- PAGE-HEADER END -->
+            <!-- ROW-1 OPEN -->
+            <div class="row">
+
+            <div class=" col-xl-6 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Billing Information</h3>
+                    </div>
+                    <form asp-controller="Checkout" asp-action="BillingDetails" method="POST">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                            <div class="card-body">
+                                <div class="row">
+
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">First Name <span class="text-red">*</span></label>
+                                            <input asp-for="Fname" type="text" class="form-control" placeholder="First name" name="fname" value="@user.Fname" />
+                                            <span asp-validation-for="Fname" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Last Name <span class="text-red">*</span></label>
+                                        <input asp-for="Lname" type="text" class="form-control" placeholder="Last name" name="lname" value="@user.Lname"  />
+                                            <span asp-validation-for="Lname" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Phone Number <span class="text-red">*</span></label>
+                                        <input asp-for="PhoneNumber" type="text" class="form-control" value="@user.PhoneNumber" name="phoneNumber" placeholder="Phone Number" />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Email address <span class="text-red">*</span></label>
+                                            <input asp-for="Email" type="email" class="form-control" placeholder="Email" name="email" value="@user.Email" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    @* <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Country <span class="text-red">*</span></label>
+                                            <select class="form-control form-select select2" data-bs-placeholder="Select">
+                                                <option value="1">Germany</option>
+                                                <option value="2">Canada</option>
+                                                <option value="3">USA</option>
+                                                <option value="4">AUS</option>
+                                            </select>
+                                        </div>
+                                    </div> *@
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">City <span class="text-red">*</span></label>
+                                            <input id="city" asp-for="Address.City" type="text" name="City" value="@user.Address.City" class="form-control" placeholder="City">
+                                            <span asp-validation-for="Address.City" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Street <span class="text-red">*</span></label>
+                                            <input id="street" asp-for="Address.StreetName" type="text" name="StreetName" value="@user.Address.StreetName" class="form-control" placeholder="Home Address">
+                                            <span asp-validation-for="Address.City" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Building Number <span class="text-red">*</span></label>
+                                        <input asp-for="Address.UnitNumber" type="text" name="UnitNumber" value="@user.Address.UnitNumber" class="form-control" placeholder="Buildoing Number">
+                                        <span asp-validation-for="Address.UnitNumber" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Postal Code <span class="text-red">*</span></label>
+                                            <input id="postcode" asp-for="Address.PostalCode" type="number" name="PostalCode" value="@user.Address.PostalCode" class="form-control" placeholder="ZIP Code">
+                                        <span asp-validation-for="Address.PostalCode" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            <input type="submit" class="btn btn-large btn-primary" value="Deliver Here & View Order Details"/>
+                            </div>
+                        </form>
+                </div>
+            </div>
+
+            <div class=" col-xl-6 col-md-12">
+                <div class="card">
+                    <div id="map"></div> 
+                   
+                </div>
+            </div>
+
+            </div>
+            <!-- ROW-1 CLOSED -->
+        </div>
+        <!-- CONTAINER CLOSED -->
+
+    </div>
+</div>
+
+
+    <script>
+        // Function to handle map click and update form
+        function onMapClick(event) {
+            const latitude = event.latlng.lat;
+            const longitude = event.latlng.lng;
+
+            // Reverse geocoding to get city and potentially other parts of address
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Extract city, street (if available), and postcode (if available)
+                    const city = data.address.city || "";
+                    const street = data.address.road || "";
+                    const postcode = data.address.postcode || "";
+
+                    // Fill the form with retrieved or empty values
+                    document.getElementById('city').value = city;
+                    document.getElementById('street').value = street;
+                    document.getElementById('postcode').value = postcode;
+
+                    // Prompt user for missing information (optional)
+                    if (!street) {
+                        alert("Please enter the specific street name for this location.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching city name:", error);
+                    document.getElementById('city').value = "City lookup failed";
+                });
+        }
+
+        // Function to initialize the map
+        function initMap() {
+            const mapElement = document.getElementById('map');
+
+            // Default map options centered on El Mahalla El Kubra, Egypt (adjust as needed)
+            const mapOptions = {
+                center: { lat: 30.5734, lng: 30.9925 },
+                zoom: 13
+            };
+
+            // Create a new map instance
+            const map = new L.map(mapElement, mapOptions);
+
+            // Add free tile layer (e.g., OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Add click listener for map interaction
+            map.on('click', onMapClick);
+        }
+
+        // Load the map script (Leaflet library)
+        const leafletScript = document.createElement('script');
+        leafletScript.src = "https://unpkg.com/leaflet@1.9.3/dist/leaflet.js";
+        document.head.appendChild(leafletScript);
+
+        // Once the script loads, initialize the map
+        leafletScript.onload = initMap;
+    </script>
+
+
+@* <script>
+    // Function to handle map click and update form
+    function onMapClick(event) {
+        const latitude = event.latlng.lat;
+        const longitude = event.latlng.lng;
+
+        // Reverse geocoding to get city
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
+            .then(response => response.json())
+            .then(data => {
+                // Extract city name from response
+                const city = data.address.city || "";
+                document.getElementById('city').value = city || "We Don't Deliver Here";
+            })
+            .catch(error => {
+                console.error("Error fetching city name:", error);
+                // Fallback: Find nearest populated place if initial lookup fails
+                findNearestPopulatedPlace(latitude, longitude);
+            });
+    }
+
+    // Function to find nearest populated place (fallback)
+    function findNearestPopulatedPlace(latitude, longitude) {
+        // Replace this with a more robust function to find nearest populated place (e.g., using an API with a key)
+        console.warn("Nominatim lookup failed, using placeholder for nearest place");
+        document.getElementById('city').value = "Nearest Populated Place (Placeholder)";
+    }
+
+    // Function to initialize the map
+    function initMap() {
+        const mapElement = document.getElementById('map');
+
+        // Default map options centered on El Mahalla El Kubra, Egypt (adjust as needed)
+        const mapOptions = {
+            center: { lat: 30.5734, lng: 30.9925 },
+            zoom: 13
+        };
+
+        // Create a new map instance
+        const map = new L.map(mapElement, mapOptions);
+
+        // Add free tile layer (e.g., OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add click listener for map interaction
+        map.on('click', onMapClick);
+    }
+
+    // Load the map script (Leaflet library)
+    const leafletScript = document.createElement('script');
+    leafletScript.src = "https://unpkg.com/leaflet@1.9.3/dist/leaflet.js";
+    document.head.appendChild(leafletScript);
+
+    // Once the script loads, initialize the map
+    leafletScript.onload = initMap;
+// </script> *@
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

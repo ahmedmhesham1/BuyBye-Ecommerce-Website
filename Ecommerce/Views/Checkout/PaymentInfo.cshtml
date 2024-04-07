@@ -1,0 +1,58 @@
+﻿<!--app-content open-->
+<div class="main-content app-content mt-0">
+	<div class="side-app">
+
+		<!-- CONTAINER -->
+		<div class="main-container container-fluid">
+
+			<!-- PAGE-HEADER -->
+			<div class="page-header">
+				<h1 class="page-title">Checkout</h1>
+				<div>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">E-Commerce</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Checkout</li>
+					</ol>
+				</div>
+			</div>
+			<!-- PAGE-HEADER END -->
+			<div class="row">
+
+				<div class="offset-xl-3 col-xl-6 col-md-12">
+					<div class="card ">
+
+						<div class="card-header">
+							<h3 class="card-title">Payment Information</h3>
+						</div>
+							<div class="card-body">
+								<div class="card-pay">
+
+									<div class="tab-content">
+										<div class="tab-pane active show" id="tab20">
+											@* <div class="bg-danger-transparent-2 text-danger br-3 mb-4" role="alert">Please Enter Valid Details</div> *@
+						<form asp-controller="Checkout" asp-action="PaymentInfo" method="post">
+											<div class="form-group">
+												<label class="form-label">CardHolder Email</label>
+												<input name="Email" type="text" class="form-control" placeholder="Email" required>
+											</div>
+											<button style="width:100%" type="submit" class="btn  btn-lg btn-primary"><i class="fa fa-cc-stripe"></i> Pay with Stripe</button>
+						</form>
+										<form asp-controller="Checkout" asp-action="CashOnDelivery" method="post">
+											<br />
+											<button style="width:100%" type="submit" class="btn  btn-lg btn-secondary"><i class="fa fa-handshake-o"></i> Cash on Delivery</button>
+										</form>
+
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- CONTAINER CLOSED -->
+	</div>
+</div>
+<!--app-content closed-->

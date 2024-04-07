@@ -1,0 +1,135 @@
+﻿@page
+@model ExternalLoginModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_IdentityLayout";
+}
+
+
+@* <hr />
+
+<p id="external-login-description" class="text-info">
+    You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
+    Please enter an email address for this site below and click the Register button to finish
+    logging in.
+</p> *@
+
+
+
+
+           @*  <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" id="name1" asp-for="Input.Fname" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name2" asp-for="Input.Lname" placeholder="Last Name">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="Input.Country" id="name2" placeholder="Country">
+                    </div>
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name1" asp-for="Input.City" placeholder="City">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name2" asp-for="Input.StreetName" placeholder="Street Namer">
+                    </div>
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name1" asp-for="Input.UnitNumber" placeholder="Unit Number">
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button> *@
+
+<div class="row">
+    <div class="offset-xl-3 col-md-12 col-xl-6 " style="margin-top: 80px;">
+        <div class="card">
+            <div class="card-header">
+                <h2 id="external-login-title">Complete your @Model.ProviderDisplayName account data.</h2>
+                @* <h3 class="card-title" id="external-login-title">
+                    Please Complete the data for this site below and click the Register button to finish
+                    logging in.
+                </h3> *@
+            </div>
+            <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12 mb-0">
+                        <div class="form-group">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="Please enter your email." />
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                            <div class="form-group">
+
+                                <input type="text" class="form-control" id="name1" asp-for="Input.Fname" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name2" asp-for="Input.Lname" placeholder="Last Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                            <div class="form-group">
+                                <input type="text" class="form-control" asp-for="Input.Country" id="name2" placeholder="Country">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name1" asp-for="Input.City" placeholder="City">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name2" asp-for="Input.StreetName" placeholder="Street Namer">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="name1" asp-for="Input.UnitNumber" placeholder="Unit Number">
+                            </div>
+                        </div>
+
+                    </div>
+                <div class="form-footer mt-2">
+                        <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                    </div>
+            </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@* @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} *@

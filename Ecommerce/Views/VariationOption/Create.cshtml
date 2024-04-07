@@ -1,0 +1,93 @@
+﻿@model Ecommerce.Models.VariationOption
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="row" style="width:90%;">
+        <div class="col-xl-5 col-lg-12 col-md-12">
+            <h1 class="mt-4"><b> Edit Variation</b></h1>
+        </div>
+        @* <div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0" style="display: flex; align-items: center; justify-content: flex-end;">
+        <a asp-action="Index" class="btn btn-primary btn-block float-end my-2"><i class="fa fa-bars me-2"></i>Back To List</a>
+        </div> *@
+    </div>
+</div>
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="container" style="width:90%;">
+        <div class="card">
+            <div class="card-body">
+                <form action="Create" method="post" class="form-horizontal">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class=" row mb-2">
+                        <label for="inputName" class="col-md-2 form-label">Variation Name</label>
+                        <div class="col-md-10">
+                            <span style="margin-right:10px;">
+                                <span class="" style="font-size: 1rem; margin-right:1px;">@ViewBag.Variation.Name</span>
+                                <a href="~/Variation/Edit/@ViewBag.Variation.Id" class="badge rounded-pill bg-warning badge-sm me-1 mb-1 mt-1" style="font-size: 1rem; margin-right:1px;" data-bs-placement="top" data-bs-toggle="tooltip" title="Edit Variation Options"><i class="fa fa-pencil"></i></a>
+
+                            </span>
+                        </div>
+                    </div>
+                    <input name="VariationId" type="text" class="form-control" value="@ViewBag.Variation.Id" hidden />
+                    <div class=" row mb-2">
+                        <label for="inputName" class="col-md-2 form-label">Variation Options: </label>
+                        <div class="col-md-10">
+                            @if (@ViewBag.Variation.Options ==null)
+                            {
+                                <span class="badge rounded-pill bg-danger badge-sm me-1 mb-1 mt-1" style="font-size: 1rem; margin-right:5px;">No Variations</span>
+                            }
+                            else
+                            {
+                                @foreach (var opt in @ViewBag.Variation.Options)
+                                {
+                                    <span style="margin-right:10px;">
+                                        <p class="badge rounded-pill bg-primary badge-sm me-1 mb-1 mt-1" style="font-size: 1rem; margin-right:1px;">@opt.Value</p>
+@*                                         <a href="~/VariationOption/Edit/@opt.Id" class="badge rounded-pill bg-warning badge-sm me-1 mb-1 mt-1" style="font-size: 1rem; margin-right:1px;" data-bs-placement="top" data-bs-toggle="tooltip" title="Edit Variation Options"><i class="fa fa-pencil"></i></a>
+ *@
+                                        <a href="/VariationOption/Delete/@opt.Id" class="badge rounded-pill bg-danger badge-sm me-1 mb-1 mt-1" style="font-size: 1rem; margin-right:10px;" data-bs-placement="top" data-bs-toggle="tooltip" title="Delete Variation"><i class="fe fe-trash-2"></i></a>
+                                    </span>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class=" row mb-2">
+                        <label for="inputName" class="col-md-2 form-label">Add Option: </label>
+                        <div class="col-md-10">
+                            <input type="text" name="Value" class="form-control" id="inputName" placeholder="Name" >
+                            <span asp-validation-for="Value" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div style="display:flex;justify-content: flex-end;">
+                        <div class="btn-list mt-4">
+                            <a asp-action="Create" asp-controller="Variation" asp-route-id="@ViewBag.Variation.CategoryId" asp-controller="Category" class="btn ripple btn-danger"> Back </a>
+                            <input type="submit" value="Create" class="btn ripple btn-success me-2" />
+                        </div>
+                    </div>
+                    @* <div class="mb-0 mt-4 row justify-content-end">
+                    <div class="col-md-9">
+                    <button class="btn btn-primary">Sign in</button>
+                    <button class="btn btn-secondary">Cancel</button>
+                    </div>  
+                    </div> *@
+                </form>
+                <div class="col-sm-6 col-lg-3  mt-2 mb-2">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

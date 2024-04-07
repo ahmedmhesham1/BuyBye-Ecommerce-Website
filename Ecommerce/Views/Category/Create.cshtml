@@ -1,0 +1,69 @@
+﻿@model Ecommerce.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@{
+    Layout = "_AdminLayout";
+}
+
+
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="row" style="width:90%;">
+        <div class="col-xl-5 col-lg-12 col-md-12">
+            <h1 class="mt-4"><b> Create Category</b></h1>
+        </div>
+        @* <div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0" style="display: flex; align-items: center; justify-content: flex-end;">
+            <a asp-action="Index" class="btn btn-primary btn-block float-end my-2"><i class="fa fa-bars me-2"></i>Back To List</a>
+        </div> *@
+    </div>
+</div>
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="container" style="width:90%;">
+            <div class="card">
+                <div class="card-body">
+                <form action="Create" method="post" class="form-horizontal">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class=" row mb-2">
+                        <label for="inputName" class="col-md-2 form-label">Category Name</label>
+                        <div class="col-md-10">
+                            <input asp-for="Name" class="form-control" id="inputName" placeholder="Name" required>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class=" row mb-2">
+                        <label for="inputdesc" class="col-md-2 form-label" style="margin-top:50px;">Description</label>
+                        <div class="col-md-10">
+                            <textarea asp-for="Description" class="form-control" id="inputdesc" placeholder="Description" style="margin-top:50px;" required></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content: flex-end;">
+                        <div class="btn-list mt-4">
+                            <a asp-action="Index" class="btn ripple btn-danger"> Cancel </a>
+                            <input type="submit" value="Create" class="btn ripple btn-success me-2"/>
+                        </div>
+                    </div>
+                    @* <div class="mb-0 mt-4 row justify-content-end">
+                        <div class="col-md-9">
+                            <button class="btn btn-primary">Sign in</button>
+                            <button class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div> *@
+                </form>
+                
+                        
+                </div>
+            </div>
+        </div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+} 

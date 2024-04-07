@@ -1,0 +1,81 @@
+﻿@model Ecommerce.Models.Category
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@{
+    Layout = "_AdminLayout";
+}
+
+
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="row" style="width:90%;">
+        <div class="col-xl-5 col-lg-12 col-md-12">
+            <h1 class="mt-4"><b> Edit Category</b></h1>
+        </div>
+       
+    </div>
+</div>
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="container" style="width:90%;">
+            <div class="card">
+                <div class="card-body">
+                <form action="Edit" method="post" class="form-horizontal">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class=" row mb-2">
+                        <label for="inputName" class="col-md-2 form-label">Category Name</label>
+                        <div class="col-md-10">
+                            <input asp-for="Name" class="form-control" id="inputName" placeholder="Name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class=" row mb-2">
+                        <label for="inputdesc" class="col-md-2 form-label" style="margin-top:50px;">Description</label>
+                        <div class="col-md-10">
+                            <textarea asp-for="Description" class="form-control" id="inputdesc" placeholder="Description" style="margin-top:50px;"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class=" row mb-2">
+                        <label for="inputdesc" class="col-md-2 form-label" style="margin-top:50px;">Variations: </label>
+                        <div class="col-md-10" style="margin-top:48px;">
+                            @if(@Model.Variations.Count()==0)
+                            {
+                                <span class="badge rounded-pill bg-danger badge-sm me-1 mb-1 mt-1" style="font-size: 1rem; margin-top:50px; margin-right:5px;">No Variations</span>
+                            }
+                            else
+                            {
+                                @foreach (var v in @Model.Variations)
+                                {
+                                    <span class="badge rounded-pill bg-primary badge-sm me-1 mb-1 mt-1" style="font-size: 1rem; margin-top:50px; margin-right:5px;">@v.Name</span>
+                                }
+                            }                     
+                            <a href="~/Variation/Create/@Model.Id" class="badge rounded-pill bg-warning badge-sm me-1 mb-1 mt-1" style="font-size: 1rem; margin-top:50px; margin-right:5px;"><i class="fa fa-pencil"></i> </a>
+
+                           
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content: flex-end;">
+                        <div class="btn-list mt-4">
+                            <a asp-action="Index" class="btn ripple btn-danger"> Cancel </a>
+                            <input type="submit" value="Save" class="btn ripple btn-success me-2"/>
+                        </div>
+                    </div>
+                    
+                </form>
+
+                
+                        
+                </div>
+            </div>
+        </div>
+</div>
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

@@ -1,0 +1,99 @@
+﻿@page
+@model LoginModel
+
+@{
+    Layout = "_IdentityLayout";
+}
+
+                <div class="container-login100">
+                    <div class="wrap-login100 p-6" style="width:500px">
+                        <form id="account" method="post">
+                        </section>
+                            <span class="login100-form-title pb-5">
+                                Login
+                            </span>
+            
+                            <div asp-validation-summary="All" class="text-danger text-center" role="alert"></div>
+
+            
+                            <div class="panel panel-primary">
+                                <div class="tab-menu-heading">
+                                    <div class="tabs-menu1">
+                                        <!-- Tabs -->
+                                        <ul class="nav panel-tabs">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body tabs-menu-body p-0 pt-5">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab5">
+                                            <div class="wrap-input100 validate-input input-group" data-bs-validate="Valid email is required: ex@abc.xyz">
+                                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                    <i class="zmdi zmdi-email text-muted" aria-hidden="true"></i>
+                                                </a>
+                                            <input asp-for="Input.Email" class="input100 border-start-0 form-control ms-0" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                            </div>
+                                            <div class="wrap-input100 validate-input input-group" id="Password-toggle">
+                                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                                    <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                                </a>
+                                                <input asp-for="Input.Password" class="input100 border-start-0 form-control ms-0" autocomplete="current-password" aria-required="true" placeholder="password" />
+                                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                            </div>
+                                            <div class="text-end pt-4">
+                                                <p class="mb-0"><a id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a></p>
+                                            </div>
+                                            <div class="wrap-input100 validate-input input-group" style="margin-left: 20px;">
+
+                                                <div class="checkbox mb-3">
+                                                    <label asp-for="Input.RememberMe" class="form-label">
+                                                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                                            </div>
+                                            @* <div>
+                                                <p>
+                                                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                                                </p>
+                                            </div> *@
+                        </form>
+                                            <div class="text-center pt-3">
+                            <p class="text-dark mb-0">Not a member?<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"> Sign Up</a></p>
+                                            </div>
+                                            <label class="login-social-icon"><span>Login with Social</span></label>
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div class="d-flex justify-content-center">
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins!)
+                                    {
+                                        <button type="submit" class="btn" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                            <div class="social-login me-4 text-center">
+                                                @if (@provider.Name == "Google")
+                                                {
+                                                    <i class="fa fa-google" style="color:#6c5ffc"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-facebook" style="color:#6c5ffc"></i>
+
+                                                }
+                                            </div>
+                                        </button>
+                                        @* <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button> *@
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                                        </div>
+
+                                    </div>
+                                
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

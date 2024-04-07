@@ -1,0 +1,267 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+<div class="main-container container">
+    <div class="page-header">
+        <h1 class="page-title">Business Intelligence</h1>
+        <div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Tables</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Your Dashboard</li>
+            </ol>
+        </div>
+    </div>
+    <!-- ROW-1 -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                    <div class="card overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="mt-2">
+                                    <h6 class="">Total Users</h6>
+                                    <h2 class="mb-0 number-font">44,278</h2>
+                                </div>
+                                <div class="ms-auto">
+                                    <div class="chart-wrapper mt-1">
+                                        <canvas id="saleschart"
+                                                class="h-8 w-9 chart-dropshadow"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="text-muted fs-12">
+                                <span class="text-secondary">
+                                    <i class="fe fe-arrow-up-circle  text-secondary"></i> 5%
+                                </span>
+                                Last week
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                    <div class="card overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="mt-2">
+                                    <h6 class="">Total Profit</h6>
+                                    <h2 class="mb-0 number-font">67,987</h2>
+                                </div>
+                                <div class="ms-auto">
+                                    <div class="chart-wrapper mt-1">
+                                        <canvas id="leadschart"
+                                                class="h-8 w-9 chart-dropshadow"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="text-muted fs-12">
+                                <span class="text-pink">
+                                    <i class="fe fe-arrow-down-circle text-pink"></i> 0.75%
+                                </span>
+                                Last 6 days
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                    <div class="card overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="mt-2">
+                                    <h6 class="">Total Expenses</h6>
+                                    <h2 class="mb-0 number-font">$76,965</h2>
+                                </div>
+                                <div class="ms-auto">
+                                    <div class="chart-wrapper mt-1">
+                                        <canvas id="profitchart"
+                                                class="h-8 w-9 chart-dropshadow"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="text-muted fs-12">
+                                <span class="text-green">
+                                    <i class="fe fe-arrow-up-circle text-green"></i> 0.9%
+                                </span>
+                                Last 9 days
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                    <div class="card overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="mt-2">
+                                    <h6 class="">Total Cost</h6>
+                                    <h2 class="mb-0 number-font">$59,765</h2>
+                                </div>
+                                <div class="ms-auto">
+                                    <div class="chart-wrapper mt-1">
+                                        <canvas id="costchart"
+                                                class="h-8 w-9 chart-dropshadow"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="text-muted fs-12">
+                                <span class="text-warning">
+                                    <i class="fe fe-arrow-up-circle text-warning"></i> 0.6%
+                                </span>
+                                Last year
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ROW-1 END -->
+<div class="row text-center">
+    <div class="offset-lg-3 col-lg-3 col-md-6 col-sm-12 mx-auto">
+        <div class="card overflow-hidden">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="mt-2">
+                        <h6 class="">Total Users</h6>
+                        <h2 class="mb-0 number-font" id="totalUsers">0</h2>
+                    </div>
+                    <div class="ms-auto">
+                        <div style="text-align:right">
+                            <img style="width:30%;height:30%;border-radius:50%" src="/assets/images/users.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 mx-auto">
+        <div class="card overflow-hidden">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="mt-2">
+                        <h6 class="">Total Orders</h6>
+                        <h2 class="mb-0 number-font" id="totalOrders">0</h2>
+                    </div>
+                    <div class="ms-auto">
+                        <div style="text-align:right">
+                            <img style="width:30%;height:30%;border-radius:50%" src="/assets/images/orders.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="width: 800px; margin: 1px auto;" class="row">
+    <!-- Add canvas element for chart -->
+    <canvas id="salesChart"></canvas>
+</div>
+
+</div>
+
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/Admin/GetSalesData',
+            type: 'GET',
+            success: function (data) {
+                renderChart(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+
+    function renderChart(data) {
+        var months = [];
+        var sales = [];
+
+        // enter all months data, also get the names of the months
+        for (var i = 0; i < 12; i++) { // Start from 0 to add space before January
+            var monthIndex = i + 1; // Adjust month index
+            var monthData = data.find(item => item.month === monthIndex);
+            if (monthData) {
+                sales.push(monthData.totalSales);
+            } else {
+                sales.push(0);
+            }
+            months.push(new Date(2000, monthIndex - 1, 1).toLocaleString('default', { month: 'short' })); // Get abbreviated month name
+        }
+
+        var ctx = document.getElementById('salesChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Total Sales',
+                    data: sales,
+                    backgroundColor: 'rgba(108, 95, 252, 0.1)',
+                    borderColor: 'rgb(108, 95, 252)',
+                    borderWidth: 2,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            stepSize: 5000
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        var totalOrders = 0;
+        var targetOrders = @ViewBag.OrdersNum;
+
+        var interval = setInterval(function () {
+            if (totalOrders < targetOrders) {
+                totalOrders++;
+                $('#totalOrders').text(totalOrders);
+            } else {
+                clearInterval(interval);
+            }
+        }, 200);
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        var totalUsers = 0;
+        var targetUsers = @ViewBag.UsersNum;
+
+        var interval = setInterval(function () {
+            if (totalUsers < targetUsers) {
+                totalUsers++;
+                $('#totalUsers').text(totalUsers);
+            } else {
+                clearInterval(interval);
+            }
+        }, 200);
+    });
+</script>

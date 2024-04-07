@@ -1,0 +1,45 @@
+﻿@model Ecommerce.Models.VariationOption
+
+@{
+    ViewData["Title"] = "Delete";
+}
+@{
+    Layout = "_AdminLayout";
+}
+
+
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="row" style="width:90%;">
+        <div class="col-xl-5 col-lg-12 col-md-12">
+            <h1 class="mt-4"><b> Delete Variation</b></h1>
+        </div>
+       
+    </div>
+</div>
+
+<div style="display:flex; justify-content:center; align-items:center; align-content:center;">
+    <div class="container" style="width:90%;">
+            <div class="card">
+                <form asp-action="Delete" method="post">
+                <div class="card-body">
+                <h3 class="mt-4 text-danger"><b> Are you sure you want to delete this option?</b></h3>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class=" row mb-2">
+                        <label for="inputName" class="col-md-2 form-label">Option Value: </label>
+                        <div class="col-md-10">
+                            <p class="form-label">@Model.Value</p>
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content: flex-end;">
+                        <div class="btn-list mt-4">
+                            <input type="submit" asp-route-id="@Model?.Id" class="btn ripple btn-danger" value="Delete Option"/>               
+                            <a asp-action="Create" asp-route-Id="@Model?.VariationId" class="btn ripple btn-primary"> Keep Option </a>
+                        </div>
+                    </div>
+            </form>
+        </div>
+            </div>
+        </div>
+</div>

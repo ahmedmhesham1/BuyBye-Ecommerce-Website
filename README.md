@@ -1,16 +1,31 @@
-![Picture1](https://github.com/ahmedmhesham1/BuyBye-Ecommerce-Website/assets/115400189/8b22740d-dabb-4ab2-90a8-9f33021e1f1e)
-<h1>- Diagrams:</h1>
+# Content
+## Key Features
+-	class, sequence, and state diagrams of the system to determine all the needed features.
+-	Identity Roles for admin and (Customer + Seller)
+-	Admin Dashboard 
+-	Seller Dashboard 
+-	External payment gateway
+-	SendGrid email service for email confirmation
 
-![Untitled (1)](https://github.com/ahmedmhesham1/BuyBye-Ecommerce-Website/assets/115400189/5bc3ee72-bc71-41b9-99a6-a5cd57a76329)
+## Project Video: 
+https://www.linkedin.com/posts/ahmedkaoud_iti-asp-mvc-activity-7182821937927114754-hk8W?utm_source=combined_share_message&utm_medium=member_desktop
 
-![Untitled](https://github.com/ahmedmhesham1/BuyBye-Ecommerce-Website/assets/115400189/43b3fd4a-cff2-451e-9ba5-c6b5a2d27a1b)
+## Use Case Diagram
+<img src="https://github.com/abdullahMorsi/BuyBye-Ecommerce/assets/62671812/0ebf953d-d8c0-485f-96b0-9ec324e29062" alt="ERD" height="600">
 
-![Picture4](https://github.com/ahmedmhesham1/BuyBye-Ecommerce-Website/assets/115400189/a6b0386c-7124-4e88-b8a7-da7e8ae90f41)
+## Use case Diagram
+<img src="https://github.com/abdullahMorsi/BuyBye-Ecommerce/assets/62671812/a7ccdfd5-4c83-4b2f-b9ee-2f4e322de029" alt="ERD" height="600">
 
-![Picture3](https://github.com/ahmedmhesham1/BuyBye-Ecommerce-Website/assets/115400189/85a46c3a-cf3c-4894-a6f6-ed5f3589ce6a)
+## Class Diagram
+<img src="https://github.com/abdullahMorsi/BuyBye-Ecommerce/assets/62671812/76721abc-70c3-4894-abeb-e3eefe0d8f49" alt="ERD" height="600">
 
-![Picture2](https://github.com/ahmedmhesham1/BuyBye-Ecommerce-Website/assets/115400189/02f3bb9a-9a1e-4130-b5e5-0f75815d84ef)
+## Sequence Diagram
+- Seller Add Product Sequence
+- Admin approve product sequence
+-  User add to cart sequence
+-  User checkout sequence
+- <img src="https://github.com/abdullahMorsi/BuyBye-Ecommerce/assets/62671812/ce8bf0b1-5e1a-4964-8500-4dc5624b4602" alt="ERD" width="300"> <img src="https://github.com/abdullahMorsi/BuyBye-Ecommerce/assets/62671812/e53fbd7c-01f3-4ff2-a1de-c05c317024b7" alt="ERD" width="300">
+- <img src="https://github.com/abdullahMorsi/BuyBye-Ecommerce/assets/62671812/a53f48de-17f0-4fc2-8844-0f16c7f025d0" alt="ERD" width="300"> <img src="https://github.com/abdullahMorsi/BuyBye-Ecommerce/assets/62671812/5fea664d-7fa7-4b8c-9b6b-ed0ef5429b04" alt="ERD" width="300">
 
-![Untitled](https://github.com/ahmedmhesham1/BuyBye-Ecommerce-Website/assets/115400189/6e53df03-8203-4b4a-bc20-45bf35f9b096)
-
-
+## Landing Page
+![image](https://github.com/abdullahMorsi/BuyBye-Ecommerce/assets/62671812/4af8806e-9b9a-48a5-b980-a125a84ec0f5)
